@@ -40,4 +40,8 @@ public class InMemoryBibService implements BibService {
         return list;
     }
     
+    @Override
+    public void addEntry(Entry entry){
+        list.add(entry);
+    }
 }

@@ -18,6 +18,9 @@
     <body>
         <div class="container">
             <h1>We &hearts; Justin <img class="bibtex" src="http://upload.wikimedia.org/wikipedia/commons/3/30/BibTeX_logo.svg" height=""alt="BibTex">!</h1>
+            <form action="add">
+                <input type="submit" value="Add New"/>
+            </form>
             <c:forEach var="entry" items="${entries}">
                 <div class="panel panel-default">
                     <div class="panel-heading">
