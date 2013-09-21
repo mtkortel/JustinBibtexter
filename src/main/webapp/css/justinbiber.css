@@ -1,0 +1,7 @@
+.panel dl, .panel h4 {
+    margin-top: 0;
+    margin-bottom: 0;
+}                
+.bibtex {
+    height: 1em;
+}
