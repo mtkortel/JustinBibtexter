@@ -24,12 +24,12 @@
             <c:forEach var="entry" items="${entries}">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h4>${entry.getTitle()}</h4>
+                        <h4>${entry.title}</h4>
                     </div>
                     <div class="panel-body">
                         <dl class="dl-horizontal">
-                            <c:forEach var="field" items="${entry.getFields()}">
-                                <dt>${field.getKey()}</dt><dd>${field.getValue()}</dd>
+                            <c:forEach var="field" items="${entry.fields}">
+                                <dt>${field.key}</dt><dd>${field.value}</dd>
                             </c:forEach>
                         </dl>
                     </div>
