@@ -1,8 +1,6 @@
 package ohtu.justinbiber.controller;
 
-import java.lang.reflect.Member;
 import java.util.List;
-import javax.inject.Inject;
 import ohtu.justinbiber.domain.Entry;
 import ohtu.justinbiber.domain.EntryType;
 import ohtu.justinbiber.service.BibService;
