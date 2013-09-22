@@ -24,7 +24,7 @@
             <c:forEach var="entry" items="${entries}">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h4>${entry.getValue("title")}</h4>
+                        <h4>${entry.getTitle()}</h4>
                     </div>
                     <div class="panel-body">
                         <dl class="dl-horizontal">

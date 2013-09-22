@@ -46,4 +46,8 @@ public class Entry {
         return null;
     }
     
+    public String getTitle() {
+        return getValue("title");
+    }
+    
 }
