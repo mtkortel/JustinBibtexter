@@ -13,7 +13,7 @@
         That way multiple projects can share the same settings (useful for formatting rules for example).
         Any value defined here will override the pom.xml file value but is only applicable to the current project.
         -->
-        <netbeans.hint.j2eeVersion>1.7-web</netbeans.hint.j2eeVersion>
+        <netbeans.hint.j2eeVersion>1.6-web</netbeans.hint.j2eeVersion>
     </properties>
     <spring-data xmlns="http://www.netbeans.org/ns/spring-data/1">
         <config-files>

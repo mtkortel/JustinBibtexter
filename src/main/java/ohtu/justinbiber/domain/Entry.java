@@ -7,7 +7,7 @@ public class Entry {
     
     private EntryType type;
     private String key;
-    private List<Field> fields = new ArrayList<>();
+    private List<Field> fields = new ArrayList<Field>();
 
     public Entry(EntryType type) {
         this.type = type;

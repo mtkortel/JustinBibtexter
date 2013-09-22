@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class InMemoryBibService implements BibService {
 
-    private List<Entry> list = new ArrayList<>();
+    private List<Entry> list = new ArrayList<Entry>();
 
     @PostConstruct
     private void init() {
