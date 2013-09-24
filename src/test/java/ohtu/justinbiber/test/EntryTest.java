@@ -1,3 +1,5 @@
+package ohtu.justinbiber.test;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -85,6 +87,8 @@ public class EntryTest {
         Entry entry = new Entry(new EntryType("", new FieldType[0]));
 
         entry.addField("EDITION", "8.");
+        
+         System.err.println(entry.getValue("EDITION"));
 
         assertTrue(entry.getValue("EDITION").equals("8."));
     }

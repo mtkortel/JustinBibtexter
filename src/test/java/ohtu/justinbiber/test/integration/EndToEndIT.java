@@ -1,4 +1,4 @@
-package ohtu.justinbiber;
+package ohtu.justinbiber.test.integration;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-public class EndToEndTest {
+public class EndToEndIT {
     
     private WebDriver driver;
     private String port;

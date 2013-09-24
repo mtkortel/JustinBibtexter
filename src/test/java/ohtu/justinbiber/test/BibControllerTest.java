@@ -1,3 +1,5 @@
+package ohtu.justinbiber.test;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -40,7 +42,9 @@ public class BibControllerTest {
 
     @Test
     public void hello() {
+        /*
         BibController controller = new BibController();
         controller.addBibtext("whatevertype", "Susan Wolfe", "Big Computer Science Book", "", "2006");
+        * */
     }
 }
