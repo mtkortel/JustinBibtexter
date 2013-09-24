@@ -20,8 +20,6 @@
         <jetty.port>8090</jetty.port>
         <spring.version>3.2.4.RELEASE</spring.version>
         <selenium.version>2.35.0</selenium.version>
-        <javaee.version>6.0</javaee.version>
-        <javac.version>1.6</javac.version>
         <junit.version>4.11</junit.version>
     </properties>
     
@@ -41,16 +39,30 @@
         
         <!-- java ee -->
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>${javaee.version}</version>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>2.1</version>
+            <scope>provided</scope>
+            <classifier/>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp.jstl</groupId>
+            <artifactId>jstl-api</artifactId>
+            <version>1.2</version>
+            <classifier/>
         </dependency>
         
         <!-- junit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.10</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         
@@ -123,8 +135,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
                 <configuration>
-                    <source>${javac.version}</source>
-                    <target>${javac.version}</target>
+                    <source>1.6</source>
+                    <target>1.6</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
