@@ -16,10 +16,11 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <spring.version>3.2.4.RELEASE</spring.version>
+        <junit.version>4.11</junit.version>
+        <selenium.version>2.35.0</selenium.version>
         <jetty.version>8.1.5.v20120716</jetty.version>
         <jetty.port>8090</jetty.port>
-        <spring.version>3.2.4.RELEASE</spring.version>
-        <selenium.version>2.35.0</selenium.version>
     </properties>
     
     <dependencies>
@@ -61,7 +62,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.10</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         
@@ -69,14 +70,14 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-api</artifactId>
-            <version>2.35.0</version>
+            <version>${selenium.version}</version>
             <scope>test</scope>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-htmlunit-driver</artifactId>
-            <version>2.35.0</version>
+            <version>${selenium.version}</version>
             <scope>test</scope>
             <type>jar</type>
         </dependency>
