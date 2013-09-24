@@ -19,7 +19,7 @@ public class Field {
     }
 
     public void setKey(String key) {
-        this.key = key;
+        this.key = key.toLowerCase();
     }
 
     public void setValue(String value) {

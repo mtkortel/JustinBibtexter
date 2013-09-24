@@ -38,8 +38,9 @@ public class Entry {
     }
     
     public String getValue(String key) {
+        String k = key.toLowerCase();
         for (Field field : fields) {
-            if (field.getKey().equals(key)) {
+            if (field.getKey().equals(k)) {
                 return field.getValue();
             }
         }
