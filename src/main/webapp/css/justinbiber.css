@@ -5,3 +5,23 @@
 .bibtex {
     height: 1em;
 }
+.navbar-default .navbar-brand {
+    color: black;
+}
+body { 
+    padding-top: 70px; 
+    padding-bottom: 20px;
+}
+.nav .btn {
+    vertical-align: middle;
+}
+.navbar-collapse.in, .navbar-collapse.collapsing {
+    text-align: right;
+    padding-right: 25px;
+}
+.navbar-collapse .nav:after {
+    content: "";
+    display: inline-block;
+    height: 50px;
+    vertical-align: middle;
+}
