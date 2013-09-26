@@ -40,7 +40,7 @@
         <!-- java ee -->
         <dependency>
             <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
+            <artifactId>javaee-web-api</artifactId>
             <version>6.0</version>
             <scope>provided</scope>
         </dependency>

@@ -6,6 +6,13 @@
     therefore it is assumed to be part of version control checkout.
     Without this configuration present, some functionality in the IDE may be limited or fail altogether.
     -->
+    <spring-data xmlns="http://www.netbeans.org/ns/spring-data/1">
+        <config-files>
+            <config-file>src/main/webapp/WEB-INF/web.xml</config-file>
+            <config-file>src/main/webapp/WEB-INF/spring/spring-base.xml</config-file>
+        </config-files>
+        <config-file-groups/>
+    </spring-data>
     <properties xmlns="http://www.netbeans.org/ns/maven-properties-data/1">
         <!--
         Properties that influence various parts of the IDE, especially code formatting and the like. 
@@ -14,12 +21,6 @@
         Any value defined here will override the pom.xml file value but is only applicable to the current project.
         -->
         <netbeans.hint.j2eeVersion>1.6-web</netbeans.hint.j2eeVersion>
+        <netbeans.hint.jdkPlatform>JDK_1.6</netbeans.hint.jdkPlatform>
     </properties>
-    <spring-data xmlns="http://www.netbeans.org/ns/spring-data/1">
-        <config-files>
-            <config-file>src/main/webapp/WEB-INF/web.xml</config-file>
-            <config-file>src/main/webapp/WEB-INF/spring/spring-base.xml</config-file>
-        </config-files>
-        <config-file-groups/>
-    </spring-data>
 </project-shared-configuration>
