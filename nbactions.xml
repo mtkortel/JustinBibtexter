@@ -7,4 +7,11 @@
             <goal>jetty:run</goal>
         </goals>
     </action>
+    <action>
+            <actionName>CUSTOM-Verify</actionName>
+            <displayName>Verify</displayName>
+            <goals>
+                <goal>verify</goal>
+            </goals>
+        </action>
 </actions>
