@@ -82,7 +82,7 @@
         ctrls = $('form').find('select, input');
         $('form').on('keypress', 'select, input', function(e) {
             ctrl = $(this);
-            if (e.keyCode == 13) {
+            if (e.keyCode === 13) {
                 if (ctrl.attr('type') !== 'submit' &&
                     ctrl.attr('type') !== 'number') {
                     e.preventDefault();

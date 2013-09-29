@@ -3,6 +3,7 @@ package ohtu.justinbiber.controller;
 import java.util.List;
 import ohtu.justinbiber.domain.Entry;
 import ohtu.justinbiber.domain.EntryType;
+import ohtu.justinbiber.service.BibConvertService;
 import ohtu.justinbiber.service.BibService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,8 @@ public class BibController {
  
     @Autowired
     BibService bibService;
+    @Autowired
+    BibConvertService bibConvert;
     
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String list(Model model) {
@@ -45,14 +48,11 @@ public class BibController {
         bibService.addEntry(entry);
         return "redirect:list";
     }
-    /* (final User user, final BindingResult result, Model mv) {
-
-     <select id="bibtype" name="bibtype">
-                    <option value="inproceedings">Inproceedings</option>
-                </select>
-                Author <input type="text" id="author" name="author"/>
-                Title <input type="text" id="title" name="title"/>
-                Booktitle <input type="text" id="booktitle" name="booktitle"/>
-                Year <input type="text" id="year" name="year"/>
-     */
+    
+    @RequestMapping(value = "preview", method = RequestMethod.POST)
+    public String preview(Model model){
+        String prev = bibConvert.getBibtext(bibService.getEntries());
+        model.addAttribute("preview", prev);
+        return "preview";
+    }
 }
