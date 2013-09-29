@@ -33,11 +33,13 @@ public class BibConvertService {
             }
             sb.append("}/n/n");
         }
+        /*
         StringBuilder sb2 = new StringBuilder();
         for(char c: sb.toString().toCharArray()){
             sb2.append(map.getLatex(c));
         }
-        return sb2.toString();
+        */
+        return sb.toString();
     }
 }
     /*
