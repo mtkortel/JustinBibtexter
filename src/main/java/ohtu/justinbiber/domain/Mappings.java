@@ -27,7 +27,7 @@ public class Mappings {
         str = str.replaceAll("å", "\\aa");
         str = str.replaceAll("Å", "\\AA");
         str = str.replaceAll("$", "\\$");
-        str = str.replaceAll("{", "\\{");
+        //str = str.replaceAll("{", "\\{");
         str = str.replaceAll("\"", "\\\"");
         return str;
     }
