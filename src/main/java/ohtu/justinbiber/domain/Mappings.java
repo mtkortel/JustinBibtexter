@@ -16,6 +16,22 @@ public class Mappings {
   private HashMap<String, String> mappings = new HashMap<String, String>();
   
   public Mappings(){
+      
+  }
+  
+    public String fixMappings(String str) {
+        str = str.replaceAll("ä", "\\\"{a}");
+        str = str.replaceAll("Ä", "\\\"{A}");
+        str = str.replaceAll("ö", "\\\"{o}");
+        str = str.replaceAll("Ö", "\\\"{O}");
+        str = str.replaceAll("å", "\\aa");
+        str = str.replaceAll("Å", "\\AA");
+        str = str.replaceAll("$", "\\$");
+        str = str.replaceAll("{", "\\{");
+        str = str.replaceAll("\"", "\\\"");
+        return str;
+    }
+  /*
     mappings.put("\u00A0","~"); // NO-BREAK SPACE
     mappings.put("\u00A1","{\\textexclamdown}"); // INVERTED EXCLAMATION MARK
     mappings.put("\u00A2","{\\textcent}"); // CENT SIGN
@@ -642,7 +658,7 @@ public class Mappings {
     mappings.put("\uFB04","ffl"); // LATIN SMALL LIGATURE FFL
     mappings.put("\uFB05","st"); // LATIN SMALL LIGATURE LONG S T
     mappings.put("\uFB06","st"); // LATIN SMALL LIGATURE ST
-/* Derived accented characters */
+
     mappings.put("\u00C0","\\`{A}"); // LATIN CAPITAL LETTER A WITH GRAVE
     mappings.put("\u00C1","\\'{A}"); // LATIN CAPITAL LETTER A WITH ACUTE
     mappings.put("\u00C2","\\^{A}"); // LATIN CAPITAL LETTER A WITH CIRCUMFLEX
@@ -944,4 +960,6 @@ public class Mappings {
     private String toUnicode(char ch) {
         return String.format("\\u%04x", (int) ch);
     }
+*/
+  
 }

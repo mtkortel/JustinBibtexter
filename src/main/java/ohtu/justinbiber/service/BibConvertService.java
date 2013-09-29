@@ -39,7 +39,7 @@ public class BibConvertService {
             sb2.append(map.getLatex(c));
         }
         */
-        return sb.toString();
+        return map.fixMappings(sb.toString());
     }
 }
     /*
