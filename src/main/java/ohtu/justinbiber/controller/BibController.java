@@ -49,7 +49,7 @@ public class BibController {
         return "redirect:list";
     }
     
-    @RequestMapping(value = "view-bibtext", method = RequestMethod.POST)
+    @RequestMapping(value = "view-bibtext", method = RequestMethod.GET)
     public String preview(Model model){
         String prev = bibConvert.getBibtext(bibService.getEntries());
         model.addAttribute("preview", prev);
