@@ -30,7 +30,7 @@
                 </div>
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <div class="nav navbar-nav navbar-right">
-                        <a class="btn btn-primary ${param.preview}" href="preview">Preview</a>
+                        <a class="btn btn-primary ${param.preview}" href="view-bibtext">Preview</a>
                         <a class="btn btn-primary ${param.addClass}" href="add">Add new</a>
                     </div>
                 </div><!-- /.navbar-collapse -->
