@@ -25,7 +25,7 @@ public class BibConvertService {
     public String getBibtext(List<Entry> entries){
         StringBuilder sb = new StringBuilder();
         for(Entry entry: entries){
-            sb.append("@").append(entry.getType().toString()).append("{");
+            sb.append("@").append(entry.getType().getKey().toString()).append("{");
             sb.append(entry.getKey()).append(",\n");
             for(Field field: entry.getFields()){
                 sb.append(field.getKey().toString()).append(" = {");
