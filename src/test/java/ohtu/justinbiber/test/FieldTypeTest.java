@@ -1,10 +1,10 @@
-package ohtu.justinbiber.test;
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-import ohtu.justinbiber.domain.Field;
+package ohtu.justinbiber.test;
+
+import ohtu.justinbiber.domain.FieldType;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -16,9 +16,9 @@ import static org.junit.Assert.*;
  *
  * @author danipallo
  */
-public class FieldTest {
+public class FieldTypeTest {
 
-    public FieldTest() {
+    public FieldTypeTest() {
     }
 
     @BeforeClass
@@ -39,30 +39,11 @@ public class FieldTest {
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
-    // @Test
-    // public void hello() {}
 
     @Test
-    public void consturctAfield() {
-        Field field = new Field("dfgdg", "asdaf");
-        assertTrue(field.getKey().equals("dfgdg"));
-        assertTrue(field.getValue().equals("asdaf"));
+    public void FieldTypeSetKeyWorks() {
+        FieldType someType = new FieldType("autobiography");
 
-
-        field.setValue("-111");
-
-        assertTrue(field.getValue().equals("-111"));
-    }
-
-    @Test
-    public void setKeySetsKey() {
-
-        Field field = new Field("", "");
-
-        field.setKey("22225");
-
-        assertTrue(field.getKey().equals("22225"));
-
-
+        assertTrue(someType.getKey().equals("autobiography"));
     }
 }

@@ -1,11 +1,11 @@
-package ohtu.justinbiber.test;
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+package ohtu.justinbiber.test;
 
-import ohtu.justinbiber.controller.BibController;
+import ohtu.justinbiber.domain.EntryType;
+import ohtu.justinbiber.domain.FieldType;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,9 +17,9 @@ import static org.junit.Assert.*;
  *
  * @author danipallo
  */
-public class BibControllerTest {
+public class EntryTypeTest {
 
-    public BibControllerTest() {
+    public EntryTypeTest() {
     }
 
     @BeforeClass
@@ -39,12 +39,21 @@ public class BibControllerTest {
     }
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
+    //
 
     @Test
-    public void hello() {
-        /*
-        BibController controller = new BibController();
-        controller.addBibtext("whatevertype", "Susan Wolfe", "Big Computer Science Book", "", "2006");
-        * */
+    public void getAndSetKey() {
+        EntryType entryType = new EntryType("magazine", new FieldType[0]);
+        entryType.setKey(null);
+
+        assertTrue(entryType.getKey() == null);
+
+        entryType.setKey("");
+
+        assertTrue(entryType.getKey().equals(""));
+
+        entryType.setKey("111111111234554444");
+
+        assertTrue(entryType.getKey().equals("111111111234554444"));
     }
 }

@@ -4,10 +4,8 @@ package ohtu.justinbiber.test;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import ohtu.justinbiber.domain.Entry;
 import ohtu.justinbiber.domain.EntryType;
-import ohtu.justinbiber.domain.Field;
 import ohtu.justinbiber.domain.FieldType;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -82,15 +80,48 @@ public class EntryTest {
     }
     /* Minimal test for getValue method
      */
-     @Test
+
+    @Test
     public void getValue() {
         Entry entry = new Entry(new EntryType("", new FieldType[0]));
 
         entry.addField("EDITION", "8.");
-        
-         System.err.println(entry.getValue("EDITION"));
+        entry.addField("SERIES", null);
+        entry.addField("TITLE", "alexander");
+        entry.addField("INK", "Dubious Hermit");
+
 
         assertTrue(entry.getValue("EDITION").equals("8."));
+    }
+
+    /* Minimal test for getValue method
+     */
+    @Test
+    public void getValue2() {
+        Entry entry = new Entry(new EntryType("", new FieldType[0]));
+
+
+        entry.addField("SERIES", null);
+        entry.addField("TITLE", "alexander");
+        entry.addField("INK", "Dubious Hermit");
+        entry.addField("EDITION", "10.");
+
+        assertTrue(entry.getValue("EDITION").equals("10."));
+
+    }
+
+    @Test
+    public void getValue3() {
+        Entry entry = new Entry(new EntryType("", new FieldType[0]));
+
+
+        entry.addField("SERIES", null);
+        entry.addField("TITLE", "alexander");
+        entry.addField("INK", "Dubious Hermit");
+        entry.addField("EDITION", "10.");
+
+        assertTrue(entry.getValue("SCRIPT") == null);
+
     }
 
     @Test
