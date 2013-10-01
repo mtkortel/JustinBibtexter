@@ -71,4 +71,26 @@ public class MappingsTest {
 
         assertTrue("fixMappings palauttaa:" + fixMappings, fixMappings.equals("\\\"{o}\\\"{a}"));
     }
+    
+    @Test
+    public void simpleFixMappingsTest3() {
+        Mappings mappings = new Mappings();
+        String fixMappings = mappings.fixMappings("");
+        assertTrue(fixMappings.equals(""));
+
+        fixMappings = mappings.fixMappings("åÅ");
+
+        assertTrue("fixMappings palauttaa:" + fixMappings, fixMappings.equals("\\aa\\AA"));
+    }
+    
+    @Test
+    public void simpleFixMappingsTest4() {
+        Mappings mappings = new Mappings();
+        String fixMappings = mappings.fixMappings("");
+        assertTrue(fixMappings.equals(""));
+
+        fixMappings = mappings.fixMappings("\"$ää\"");
+
+        assertTrue("fixMappings palauttaa:" + fixMappings, fixMappings.equals("\\\"\\$\\\"{a}\\\"{a}\\\""));
+    }
 }
