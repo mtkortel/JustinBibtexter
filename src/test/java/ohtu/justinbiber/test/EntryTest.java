@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
  * @author danipallo
  */
 public class EntryTest {
-
+    
     public EntryTest() {
     }
 
@@ -44,9 +44,11 @@ public class EntryTest {
 
     @Test
     public void constructAnEntry() {
-        Entry entry = new Entry(EntryType.INPROCEEDINGS);
+        EntryType entryType = new EntryType("", new FieldType[0]);
+        
+        Entry entry = new Entry(entryType);
 
-        assertTrue(entry.getType() == EntryType.INPROCEEDINGS);
+        assertTrue(entry.getType() == entryType);
         assertTrue(entry.getKey() == null);
 
     }
@@ -62,7 +64,8 @@ public class EntryTest {
 
     @Test
     public void setTypeSetsType() {
-        Entry entry = new Entry(EntryType.INPROCEEDINGS);
+        EntryType entryType = new EntryType("", new FieldType[0]);
+        Entry entry = new Entry(entryType);
 
         EntryType type2 = new EntryType("poetry collection", new FieldType[4]);
 
@@ -72,7 +75,8 @@ public class EntryTest {
 
     @Test
     public void settingAndGettingKeys() {
-        Entry entry = new Entry(EntryType.INPROCEEDINGS);
+        EntryType entryType = new EntryType("", new FieldType[0]);
+        Entry entry = new Entry(entryType);
 
         entry.setKey("newKey");
 
@@ -126,8 +130,8 @@ public class EntryTest {
 
     @Test
     public void addFieldAddsAField() {
-
-        Entry entry = new Entry(EntryType.INPROCEEDINGS);
+        EntryType entryType = new EntryType("", new FieldType[0]);
+        Entry entry = new Entry(entryType);
 
         int length = entry.getFields().size();
         entry.addField("EDITION", "2.");

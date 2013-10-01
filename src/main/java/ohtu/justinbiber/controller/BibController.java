@@ -5,6 +5,7 @@ import ohtu.justinbiber.domain.Entry;
 import ohtu.justinbiber.domain.EntryType;
 import ohtu.justinbiber.service.BibConvertService;
 import ohtu.justinbiber.service.BibService;
+import ohtu.justinbiber.service.BibTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,9 @@ public class BibController {
     BibService bibService;
     @Autowired
     BibConvertService bibConvert;
+    
+    @Autowired
+    BibTypeService bibTypeService;
     
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String list(Model model) {
@@ -40,7 +44,8 @@ public class BibController {
     @RequestMapping(value = "add-bibtext", method = RequestMethod.POST)
     public String addBibtext(@RequestParam String bibtype, @RequestParam String author,
             @RequestParam String title, @RequestParam String booktitle, @RequestParam String year) {
-        Entry entry = new Entry(EntryType.INPROCEEDINGS);
+        EntryType inproceedings = bibTypeService.getEntryType("inproceedings");
+        Entry entry = new Entry(inproceedings);
         entry.addField("author", author);
         entry.addField("title", title);
         entry.addField("booktitle", booktitle);

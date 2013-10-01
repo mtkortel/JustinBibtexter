@@ -5,16 +5,22 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import ohtu.justinbiber.domain.Entry;
 import ohtu.justinbiber.domain.EntryType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class InMemoryBibService implements BibService {
+    
+    @Autowired
+    BibTypeService bibTypeService;
 
     private List<Entry> list = new ArrayList<Entry>();
 
     @PostConstruct
     private void init() {
-        Entry royce70 = new Entry(EntryType.INPROCEEDINGS);
+        EntryType inproceedings = bibTypeService.getEntryType("inproceedings");
+        
+        Entry royce70 = new Entry(inproceedings);
         royce70.setKey("royce70");
         royce70.addField("AUTHOR", "Royce, Walker");
         royce70.addField("TITLE", "Managing the Development of Large Software Systems");
@@ -23,7 +29,7 @@ public class InMemoryBibService implements BibService {
         royce70.addField("MONTH", "August");
         royce70.addField("YEAR", "1970");
         
-        Entry begel2008 = new Entry(EntryType.INPROCEEDINGS);
+        Entry begel2008 = new Entry(inproceedings);
         begel2008.setKey("Begel_2008");
         begel2008.addField("author", "Begel, Andrew and Simon, Beth");
         begel2008.addField("title", "Struggles of new college graduates in their first software development job");

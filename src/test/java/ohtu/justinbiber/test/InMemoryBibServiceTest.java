@@ -47,16 +47,17 @@ public class InMemoryBibServiceTest {
      */
      @Test
      public void constructBibService() {
+        EntryType entryType = new EntryType("", new FieldType[0]);
         InMemoryBibService service = new InMemoryBibService();
         assertTrue(service.getEntries().isEmpty());
         
         service.addEntry(new Entry(new EntryType("", new FieldType[9])));
-        service.addEntry(new Entry(EntryType.INPROCEEDINGS));
+        service.addEntry(new Entry(entryType));
         
         assertTrue(service.getEntries().size() == 2);
         
         for (int i =0; i< 1000; ++i) {
-        service.addEntry(new Entry(EntryType.INPROCEEDINGS));
+        service.addEntry(new Entry(entryType));
         }
         
         assertTrue(service.getEntries().size() == 1002);
