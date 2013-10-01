@@ -5,21 +5,15 @@ public class EntryType {
     private FieldType[] requiredFields;
 
     public EntryType(String key, FieldType[] requiredFields) {
-        this.key = key;
+        this.key = key.toLowerCase();
         this.requiredFields = requiredFields;
+    }
+    
+    public String getKey() {
+        return key;
     }
 
     public FieldType[] getRequiredFieldTypes() {
         return requiredFields;
     }
-    
-    public static final EntryType INPROCEEDINGS = new EntryType(
-            "inproceedings",
-            new FieldType[] {
-                new FieldType("author"),
-                new FieldType("title"),
-                new FieldType("booktitle"),
-                new FieldType("year")
-            }
-            );
 }
