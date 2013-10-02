@@ -29,10 +29,10 @@
                     <a class="navbar-brand" href="list">We &hearts; Justin <img class="bibtex" src="http://upload.wikimedia.org/wikipedia/commons/3/30/BibTeX_logo.svg" alt="BibTex">!</a>
                 </div>
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
-                    <div class="nav navbar-nav navbar-right">
-                        <a class="btn btn-primary ${param.preview}" href="view-bibtext">Preview</a>
-                        <a class="btn btn-primary ${param.addClass}" href="add">Add new</a>
-                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a class="btn btn-primary ${param.preview}" href="view-bibtext">Preview</a></li>
+                        <li><a class="btn btn-primary ${param.addClass}" href="add">Add new</a></li>
+                    </ul>
                 </div><!-- /.navbar-collapse -->
             </div>
         </nav>

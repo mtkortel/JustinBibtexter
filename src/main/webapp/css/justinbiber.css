@@ -12,16 +12,31 @@ body {
     padding-top: 70px; 
     padding-bottom: 20px;
 }
-.nav .btn {
+.nav li a {
+    display: inline;
     vertical-align: middle;
+    padding: 6px 12px;
 }
-.navbar-collapse.in, .navbar-collapse.collapsing {
-    text-align: right;
-    padding-right: 25px;
+.nav li a.btn-primary {
+    color: #fff;
+    background-color: #428bca;
 }
-.navbar-collapse .nav:after {
+.nav li a.btn-primary:hover, .nav li a.btn-primary:focus {
+    color: #fff;
+    background-color: #3276b1;
+}
+.nav li {
+    height: 50px;
+    margin-left: 10px;
+}
+.nav li:after {
     content: "";
     display: inline-block;
-    height: 50px;
+    height: 100%;
     vertical-align: middle;
+}
+/* collapsed state */
+.navbar-collapse.in, .navbar-collapse.collapsing {
+    text-align: right;
+    padding-right: 30px;
 }
