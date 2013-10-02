@@ -26,12 +26,12 @@ public class BibConvertService {
         StringBuilder sb = new StringBuilder();
         for(Entry entry: entries){
             sb.append("@").append(entry.getType().getKey().toString()).append("{");
-            sb.append(entry.getKey()).append(",<br/>");
+            sb.append(entry.getKey()).append(",\n");
             for(Field field: entry.getFields()){
                 sb.append(field.getKey().toString()).append(" = {");
-                sb.append(field.getValue().toString()).append("},<br/>");
+                sb.append(field.getValue().toString()).append("},\n");
             }
-            sb.append("}<br/><br/>");
+            sb.append("}\n\n");
         }
         /*
         StringBuilder sb2 = new StringBuilder();
