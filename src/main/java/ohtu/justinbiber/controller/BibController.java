@@ -44,12 +44,12 @@ public class BibController {
      * @return 
      */
     @RequestMapping(value = "add-bibtext", method = RequestMethod.POST)
-    public String addBibtext(@RequestParam String bibtype, @RequestParam String key, 
+    public String addBibtext(@RequestParam String bibtype, @RequestParam String id, 
             @RequestParam String author, @RequestParam String title, 
             @RequestParam String booktitle, @RequestParam String year) {
         EntryType inproceedings = bibTypeService.getEntryType("inproceedings");
         Entry entry = new Entry(inproceedings);
-        entry.setKey(key);
+        entry.setKey(id);
         entry.addField("author", author);
         entry.addField("title", title);
         entry.addField("booktitle", booktitle);
