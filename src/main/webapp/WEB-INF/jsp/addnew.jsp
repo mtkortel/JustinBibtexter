@@ -59,6 +59,10 @@
         </select>
     </div>
     <div class="form-group">
+        <label for="id">Author</label>
+        <input type="text" class="form-control" id="id" name="id">
+    </div>
+    <div class="form-group">
         <label for="author">Author</label>
         <input type="text" class="form-control" id="author" name="author">
     </div>
