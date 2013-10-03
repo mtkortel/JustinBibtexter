@@ -19,12 +19,15 @@ public class InMemoryBibTypeService implements BibTypeService {
         FieldType author = new FieldType("author");
         FieldType title = new FieldType("title");
         FieldType booktitle = new FieldType("booktitle");
-        FieldType year = new FieldType("year", ValueType.Type.NUMBER);
-        
+        FieldType year = new FieldType("year", ValueType.Type.NUMBER);        
         FieldType editor = new FieldType("editor");
-        FieldType publisher = new FieldType("publisher");
-        
+        FieldType publisher = new FieldType("publisher");    
         FieldType journal = new FieldType("journal");
+	FieldType howpublished = new FieldType("howpublished");
+	FieldType month = new FieldType("month", ValueType.Type.NUMBER);
+	FieldType note = new FieldType("note");
+	FieldType key = new FieldType("key");
+
         
         EntryType inproceedings = new EntryType("inproceedings",
                 new FieldType[] {
@@ -37,7 +40,6 @@ public class InMemoryBibTypeService implements BibTypeService {
         EntryType book = new EntryType("book",
                 new FieldType[] {
                     author,
-                    editor,
                     title,
                     publisher,
                     year
@@ -51,9 +53,21 @@ public class InMemoryBibTypeService implements BibTypeService {
                    year
                 });
         
+	EntryType misc = new EntryType("misc",
+                new FieldType[] {
+                   author,
+                   title,
+                   howpublished,
+		   month,
+		   year,
+		   note,
+		   key
+                });
+        
         list.add(inproceedings);
         list.add(book);
         list.add(article);
+	list.add(misc);
     }
     
     @Override

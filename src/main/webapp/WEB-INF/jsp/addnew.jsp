@@ -5,27 +5,127 @@
 <jsp:include page="header.jsp">
     <jsp:param name="addClass" value="disabled"/>
 </jsp:include>
-<!--
+
 <script lang="javascript">
     $(document).ready(function() {
+
+	function hide_all() {
+		$('label[for="author"]').hide();
+		$('label[for="title"]').hide();
+		$('label[for="journal"]').hide();
+		$('label[for="booktitle"]').hide();
+		$('label[for="year"]').hide();
+		$('label[for="month"]').hide();
+		$('label[for="publisher"]').hide();
+		$('label[for="howpublished"]').hide();
+		$('label[for="note"]').hide();
+		$('label[for="key"]').hide();
+		$('#author').hide();
+    		$('#title').hide();
+		$('#journal').hide();
+		$('#booktitle').hide();
+		$('#year').hide();
+		$('#month').hide();
+		$('#publisher').hide();
+		$('#howpublished').hide();
+		$('#note').hide();
+		$('#key').hide();
+	}
+
+	$("#bibtype").change(function(event) {
+		hide_all();
+	    	if ($('#bibtype').val() == 'inproceedings') {
+
+//    An article in a conference proceedings.
+//    Required fields: author, title, booktitle, year
+//    Optional fields: editor, volume/number, series, pages, address, month, organization, publisher, note, key
+
+			$('label[for="author"]').show();
+       	         	$('label[for="title"]').show();
+       	         	$('label[for="booktitle"]').show();
+                	$('label[for="year"]').show();
+		        $('#author').show();
+	        	$('#title').show();
+	        	$('#booktitle').show();
+	        	$('#year').show();
+	    	} else if ($('#bibtype').val() == 'book') {
+
+//    A book with an explicit publisher.
+//    Required fields: author/editor, title, publisher, year
+//    Optional fields: volume/number, series, address, edition, month, note, key
+
+                        $('label[for="author"]').show();
+                        $('label[for="title"]').show();
+                        $('label[for="publisher"]').show();
+                        $('label[for="year"]').show();
+	       		$('#author').show();
+	        	$('#title').show();
+	        	$('#publisher').show();
+	        	$('#year').show();
+	    	} else if ($('#bibtype').val() == 'article') {
+
+//    An article from a journal or magazine.
+//    Required fields: author, title, journal, year
+//    Optional fields: volume, number, pages, month, note, key
+
+                        $('label[for="author"]').show();
+                        $('label[for="title"]').show();
+                        $('label[for="journal"]').show();
+                        $('label[for="year"]').show();
+                        $('#author').show();
+                        $('#title').show();
+                        $('#journal').show();
+                        $('#year').show();
+		} else if ($('#bibtype').val() == 'misc') {
+
+//    For use when nothing else fits.
+//    Required fields: none
+//    Optional fields: author, title, howpublished, month, year, note, key
+
+                        $('label[for="author"]').show();
+                        $('label[for="title"]').show();
+                        $('label[for="howpublished"]').show();
+			$('label[for="month"]').show();
+                        $('label[for="year"]').show();
+			$('label[for="note"]').show();
+			$('label[for="key"]').show();
+                        $('#author').show();
+                        $('#title').show();
+                        $('#howpublished').show();
+                        $('#month').show();
+                        $('#year').show();
+                        $('#note').show();
+                        $('#key').show();
+                }
+
+	});
+
+	$("#bibtype").val('book').change();
+
+/*
         $('#foo').change(function() {
             if($('#foo').val() == 1){
+
                 // Number of inputs to create
                 //var number = document.getElementById("member").value;
                 // Container <div> where dynamic content will be placed
                 var container = document.getElementById("add-bibtext");
+
                 // Clear previous contents of the container
                 while (container.hasChildNodes()) {
                     container.removeChild(container.lastChild);
                 }
+
                 for (i=0;i<number;i++){
                     // Append a node with a random text
                     container.appendChild(document.createTextNode("Author: " ));
+
                     // Create an <input> element, set its type and name attributes
                     var input = document.createElement("input");
                     input.type = "text";
                     input.name = "author";
                     container.appendChild(input);
+
                     // Append a line break 
                     container.appendChild(document.createElement("br"));
                 }
@@ -34,9 +134,11 @@
             }
         //etc. etc.
         });
+*/
+
     });
 </script>
--->
+
 <!--
 <form>
     <select id="foo" onchange="this.form.ready();">
@@ -49,6 +151,7 @@
 
 </form>
 -->
+
 <form role="form" action="add-bibtext" method="post" modelAttribute="bib">
     <div class="form-group">
         <label for="bibtype">Entry type</label>
@@ -71,17 +174,44 @@
         <input type="text" class="form-control" id="title" name="title">
     </div>
     <div class="form-group">
-        <label for="title">Booktitle</label>
+        <label for="publisher">Publisher</label>
+        <input type="text" class="form-control" id="publisher" name="publisher">
+    </div>
+    <div class="form-group">
+        <label for="journal">Journal</label>
+        <input type="text" class="form-control" id="journal" name="journal">
+    </div>
+    <div class="form-group">
+        <label for="booktitle">Booktitle</label>
         <input type="text" class="form-control" id="booktitle" name="booktitle">
     </div>
     <div class="form-group">
-        <label for="title">Year</label>
+        <label for="howpublished">Howpublished</label>
+        <input type="text" class="form-control" id="howpublished" name="howpublished">
+    </div>
+    <div class="form-group">
+        <label for="month">Month</label>
+        <input type="number" class="form-control" id="month" name="month">
+    </div>
+    <div class="form-group">
+        <label for="year">Year</label>
         <input type="number" class="form-control" id="year" name="year">
     </div>
+    <div class="form-group">
+        <label for="note">Note</label>
+        <input type="text" class="form-control" id="note" name="note">
+    </div>
+    <div class="form-group">
+        <label for="key">Key</label>
+        <input type="text" class="form-control" id="key" name="key">
+    </div>
+
+
     <div class="text-right">
         <input type="submit" class="btn btn-primary" value="Submit"/>
         <a class="btn btn-default" href="list">Cancel</a>
     </div>
+
 </form>
 <script>
     $(function() {

@@ -23,9 +23,11 @@ public class InMemoryBibService implements BibService {
         EntryType inproceedings = bibTypeService.getEntryType("inproceedings");
         EntryType book = bibTypeService.getEntryType("book");
         EntryType article = bibTypeService.getEntryType("article");
+	EntryType misc = bibTypeService.getEntryType("misc");
         types.add(inproceedings);
         types.add(book);
         types.add(article);
+	types.add(misc);
         
         /*
         Entry royce70 = new Entry(inproceedings);

@@ -46,14 +46,24 @@ public class BibController {
     @RequestMapping(value = "add-bibtext", method = RequestMethod.POST)
     public String addBibtext(@RequestParam String bibtype, @RequestParam String id, 
             @RequestParam String author, @RequestParam String title, 
-            @RequestParam String booktitle, @RequestParam String year) {
+            @RequestParam String journal, @RequestParam String booktitle,
+	    @RequestParam String year, @RequestParam String month,
+	    @RequestParam String publisher, @RequestParam String howpublished,
+	    @RequestParam String note, @RequestParam String key
+	) {
         EntryType inproceedings = bibTypeService.getEntryType("inproceedings");
         Entry entry = new Entry(inproceedings);
         entry.setKey(id);
         entry.addField("author", author);
         entry.addField("title", title);
+	entry.addField("journal", journal);
         entry.addField("booktitle", booktitle);
         entry.addField("year", year);
+	entry.addField("month", month);
+	entry.addField("publisher", publisher);
+	entry.addField("howpublished", howpublished);
+	entry.addField("note", note);
+        entry.addField("key", key);
         bibService.addEntry(entry);
         return "redirect:list";
     }
