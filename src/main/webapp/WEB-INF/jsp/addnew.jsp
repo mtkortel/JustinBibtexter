@@ -54,7 +54,7 @@
         <label for="bibtype">Entry type</label>
         <select class="form-control" id="bibtype" name="bibtype">
             <c:forEach var="type" items="${types}">
-                <option value="${type.name}">${type.name}</option>
+                <option value="${type.key}">${type.key}</option>
             </c:forEach>
         </select>
     </div>
