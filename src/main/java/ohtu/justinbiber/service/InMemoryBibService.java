@@ -18,6 +18,7 @@ public class InMemoryBibService implements BibService {
 
     @PostConstruct
     private void init() {
+        /*
         EntryType inproceedings = bibTypeService.getEntryType("inproceedings");
         
         Entry royce70 = new Entry(inproceedings);
@@ -39,6 +40,7 @@ public class InMemoryBibService implements BibService {
         
         list.add(royce70);
         list.add(begel2008);
+        */
     }
     
     @Override
