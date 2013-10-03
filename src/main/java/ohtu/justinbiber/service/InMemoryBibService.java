@@ -15,12 +15,19 @@ public class InMemoryBibService implements BibService {
     BibTypeService bibTypeService;
 
     private List<Entry> list = new ArrayList<Entry>();
-
+    private List<EntryType> types = new ArrayList<EntryType>();
+    
     @PostConstruct
     private void init() {
-        /*
-        EntryType inproceedings = bibTypeService.getEntryType("inproceedings");
         
+        EntryType inproceedings = bibTypeService.getEntryType("inproceedings");
+        EntryType book = bibTypeService.getEntryType("book");
+        EntryType article = bibTypeService.getEntryType("article");
+        types.add(inproceedings);
+        types.add(book);
+        types.add(article);
+        
+        /*
         Entry royce70 = new Entry(inproceedings);
         royce70.setKey("royce70");
         royce70.addField("AUTHOR", "Royce, Walker");
@@ -51,5 +58,10 @@ public class InMemoryBibService implements BibService {
     @Override
     public void addEntry(Entry entry){
         list.add(entry);
+    }
+
+    @Override
+    public List<EntryType> getEntryTypes() {
+        return types;
     }
 }

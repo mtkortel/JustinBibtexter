@@ -53,7 +53,9 @@
     <div class="form-group">
         <label for="bibtype">Entry type</label>
         <select class="form-control" id="bibtype" name="bibtype">
-            <option value="inproceedings">Inproceedings</option>
+            <c:forEach var="type" items="${types}">
+                <option value="${type.name}">${type.name}</option>
+            </c:forEach>
         </select>
     </div>
     <div class="form-group">

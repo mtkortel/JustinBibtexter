@@ -32,7 +32,9 @@ public class BibController {
     }
     
     @RequestMapping(value = "add", method = RequestMethod.GET)
-    public String add(){
+    public String add(Model model){
+        List<EntryType> types = bibService.getEntryTypes();
+        model.addAttribute("types", types);
         return "addnew";
     }
     /**
