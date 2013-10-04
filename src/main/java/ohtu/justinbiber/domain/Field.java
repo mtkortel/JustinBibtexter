@@ -1,5 +1,8 @@
 package ohtu.justinbiber.domain;
-
+/**
+ * Contains the key and the value of a field.
+ * 
+ */
 public class Field {
     
     private String key;
