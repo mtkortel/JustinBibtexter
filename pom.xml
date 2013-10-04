@@ -21,6 +21,7 @@
         <spring.version>3.2.4.RELEASE</spring.version>
         <junit.version>4.11</junit.version>
         <selenium.version>2.35.0</selenium.version>
+        <easyb.version>1.5</easyb.version>
     </properties>
     
     <dependencies>
@@ -36,12 +37,6 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>${spring.version}</version>
-            <scope>test</scope>
-        </dependency>
         
         <!-- java ee -->
         <dependency>
@@ -56,11 +51,23 @@
             <version>1.2</version>
         </dependency>
         
-        <!-- junit -->
+        <!-- tests -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.easyb</groupId>
+            <artifactId>easyb-core</artifactId>
+            <version>${easyb.version}</version>
+            <scope>test</scope>        
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
         
@@ -155,25 +162,22 @@
             </plugin>
             <!-- integration testing -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.16</version>
+                <groupId>org.easyb</groupId>
+                <artifactId>maven-easyb-plugin</artifactId>
+                <version>1.4</version>
                 <executions>
                     <execution>
-                        <id>failsafe-integration-tests</id>
                         <phase>integration-test</phase>
                         <goals>
-                            <goal>integration-test</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>failsafe-verify</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>verify</goal>
+                            <goal>test</goal>
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <storyType>html</storyType>
+                    <storyReport>${basedir}/target/easyb/easyb-report.html
+                    </storyReport>
+                </configuration>
             </plugin>
             <!-- put all dependencies to war -->
             <plugin>
