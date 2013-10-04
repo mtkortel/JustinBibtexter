@@ -2,7 +2,10 @@ package ohtu.justinbiber.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Contains a key, an entry type object and a list of fields.
+ * 
+ */
 public class Entry {
     
     private EntryType type;
@@ -36,7 +39,12 @@ public class Entry {
     public List<Field> getFields() {
         return fields;
     }
-    
+        /**
+     * Searches for a key from List<Field> fields,
+     * if the key is found, returns the value stored with it.
+     * @param key
+     * @return 
+     */
     public String getValue(String key) {
         String k = key.toLowerCase();
         for (Field field : fields) {

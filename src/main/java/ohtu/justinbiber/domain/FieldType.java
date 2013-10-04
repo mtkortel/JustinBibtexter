@@ -1,5 +1,8 @@
 package ohtu.justinbiber.domain;
-
+/**
+ * Contains the value type of a key.
+ * 
+ */
 public class FieldType {
     
     private String key;

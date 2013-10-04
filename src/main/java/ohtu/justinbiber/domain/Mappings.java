@@ -1,15 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ohtu.justinbiber.domain;
 
 import java.util.HashMap;
 import org.springframework.stereotype.Service;
-
 /**
- *
- * @author mkortelainen
+ * Enables the use of special characters (ä,ö,å,...) in the program.
+ * 
  */
 @Service
 public class Mappings {
@@ -18,7 +13,12 @@ public class Mappings {
   public Mappings(){
       
   }
-  
+    /**
+     * Replaces the special characters met in a string with a code
+     * equivalent to them.
+     * @param str
+     * @return
+     */
     public String fixMappings(String str) {
         str = str.replace("\"", "\\\"");
         str = str.replace("ä", "\\\"{a}");
