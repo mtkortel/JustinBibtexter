@@ -9,7 +9,7 @@ import ohtu.justinbiber.domain.ValueType;
 import org.springframework.stereotype.Service;
 
 @Service
-public class InMemoryBibTypeService implements BibTypeService {
+public class InMemoryBibTypeService {//implements BibTypeService {
 
     private List<EntryType> list = new ArrayList<EntryType>();
     
@@ -70,16 +70,16 @@ public class InMemoryBibTypeService implements BibTypeService {
 	list.add(misc);
     }
     
-    @Override
+    //@Override
     public List<EntryType> getEntryTypes() {
         return list;
     }
 
-    @Override
+    //@Override
     public EntryType getEntryType(String key) {
         String lc = key.toLowerCase();
         for (EntryType entry : list) {
-            if (entry.getKey().equals(lc)) {
+            if (entry.getTypeKey().equals(lc)) {
                 return entry;
             }
         }

@@ -20,9 +20,10 @@ public class BibController {
     BibService bibService;
     @Autowired
     BibConvertService bibConvert;
-    
     @Autowired
     BibTypeService bibTypeService;
+    
+    
     
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String list(Model model) {
@@ -53,7 +54,7 @@ public class BibController {
 	) {
         EntryType inproceedings = bibTypeService.getEntryType("inproceedings");
         Entry entry = new Entry(inproceedings);
-        entry.setKey(id);
+        entry.setKeyname(id);
         entry.addField("author", author);
         entry.addField("title", title);
 	entry.addField("journal", journal);

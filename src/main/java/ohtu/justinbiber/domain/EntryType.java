@@ -1,13 +1,25 @@
 package ohtu.justinbiber.domain;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * Contains a key and a list of types of the fields related to it.
  */
+@Entity
 public class EntryType {
-    private String key;
+    
+    @Id
+    private Integer id;
+    
+    private String typekey;
     private FieldType[] requiredFields;
 
-    public EntryType(String key, FieldType[] requiredFields) {
-        this.key = key.toLowerCase();
+    public EntryType() {
+    }
+
+    public EntryType(String typekey, FieldType[] requiredFields) {
+        this.typekey = typekey.toLowerCase();
         this.requiredFields = requiredFields;
     }
 
@@ -18,14 +30,28 @@ public class EntryType {
     /**
      * @return the key
      */
-    public String getKey() {
-        return key;
+    public String getTypeKey() {
+        return typekey;
     }
 
     /**
      * @param key the key to set
      */
-    public void setKey(String key) {
-        this.key = key;
+    public void setTypeKey(String key) {
+        this.typekey = key;
+    }
+
+    /**
+     * @return the id
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

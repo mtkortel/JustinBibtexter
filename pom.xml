@@ -77,6 +77,12 @@
             <version>${selenium.version}</version>
             <scope>test</scope>
         </dependency>
+        <!-- ebean -->
+        <dependency>  
+            <groupId>org.avaje</groupId>  
+            <artifactId>ebean</artifactId>  
+            <version>2.7.1</version>  
+        </dependency>             
     </dependencies>
 
     <build>
@@ -151,6 +157,8 @@
                     <systemPropertyVariables>
                         <jetty.port>${jetty.port}</jetty.port>
                     </systemPropertyVariables>
+                    <!-- for Ebean -->
+                    <useSystemClassLoader>false</useSystemClassLoader>
                 </configuration>                
             </plugin>
             <!-- integration testing -->
@@ -180,6 +188,34 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.4</version>
+            </plugin>
+            <!-- enhance entity beans-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>  
+                <artifactId>maven-antrun-plugin</artifactId>  
+                <executions>  
+                <execution>  
+                <id>compile</id>  
+                <phase>process-ebean-enhancement</phase>  
+                <configuration>  
+                <tasks>  
+                <property name="compile_classpath" refid="maven.compile.classpath" />  
+                <echo  
+                message="Ebean enhancing test classes debug level -----------------------------------" />  
+                <echo message="Classpath: ${compile_classpath}" />  
+                <taskdef name="ebeanEnhance"  
+                classname="com.avaje.ebean.enhance.ant.AntEnhanceTask"  
+                classpath="${compile_classpath}" />  
+                <ebeanEnhance classSource="${project.build.testOutputDirectory}"  
+                packages="org.avaje.demo.test.model.**" transformArgs="debug=1" />  
+                </tasks>  
+                <encoding>UTF-8</encoding>  
+                </configuration>  
+                <goals>  
+                <goal>run</goal>  
+                </goals>  
+                </execution>  
+                </executions>   
             </plugin>
         </plugins>
     </build>

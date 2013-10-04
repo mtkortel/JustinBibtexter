@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author mkortelainen
+ * @author mtkortel
  */
 @Service
 public class BibConvertService {
@@ -25,8 +25,8 @@ public class BibConvertService {
     public String getBibtext(List<Entry> entries){
         StringBuilder sb = new StringBuilder();
         for(Entry entry: entries){
-            sb.append("@").append(entry.getType().getKey().toString()).append("{");
-            sb.append(entry.getKey()).append(",\n");
+            sb.append("@").append(entry.getType().getTypeKey().toString()).append("{");
+            sb.append(entry.getKeyname()).append(",\n");
             for(Field field: entry.getFields()){
                 sb.append(field.getKey().toString()).append(" = {");
                 sb.append(field.getValue().toString()).append("},\n");

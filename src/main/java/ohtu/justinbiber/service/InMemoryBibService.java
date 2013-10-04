@@ -9,16 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class InMemoryBibService implements BibService {
+public class InMemoryBibService {//implements BibService {
     
     @Autowired
     BibTypeService bibTypeService;
+   
+    
 
     private List<Entry> list = new ArrayList<Entry>();
     private List<EntryType> types = new ArrayList<EntryType>();
     
     @PostConstruct
     private void init() {
+        
+        //List<EntryType> types_new = 
         
         EntryType inproceedings = bibTypeService.getEntryType("inproceedings");
         EntryType book = bibTypeService.getEntryType("book");
@@ -52,17 +56,17 @@ public class InMemoryBibService implements BibService {
         */
     }
     
-    @Override
+    //@Override
     public List<Entry> getEntries() {
         return list;
     }
     
-    @Override
+    //@Override
     public void addEntry(Entry entry){
         list.add(entry);
     }
 
-    @Override
+    //@Override
     public List<EntryType> getEntryTypes() {
         return types;
     }

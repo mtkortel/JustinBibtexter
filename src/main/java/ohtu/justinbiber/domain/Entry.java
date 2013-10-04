@@ -2,15 +2,26 @@ package ohtu.justinbiber.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 /**
  * Contains a key, an entry type object and a list of fields.
  * 
  */
+@Entity
 public class Entry {
     
+    @Id
+    private Integer id;
+    
+    @OneToMany
     private EntryType type;
-    private String key;
+    private String keyname;
     private List<Field> fields = new ArrayList<Field>();
+
+    public Entry() {
+    }
 
     public Entry(EntryType type) {
         this.type = type;
@@ -28,12 +39,12 @@ public class Entry {
         this.type = type;
     }
 
-    public String getKey() {
-        return key;
+    public String getKeyname() {
+        return keyname;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setKeyname(String key) {
+        this.keyname = key;
     }
 
     public List<Field> getFields() {
@@ -57,6 +68,20 @@ public class Entry {
     
     public String getTitle() {
         return getValue("title");
+    }
+
+    /**
+     * @return the id
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Integer id) {
+        this.id = id;
     }
     
 }

@@ -19,7 +19,7 @@
 		$('label[for="publisher"]').hide();
 		$('label[for="howpublished"]').hide();
 		$('label[for="note"]').hide();
-		$('label[for="key"]').hide();
+		$('label[for="keyname"]').hide();
 		$('#author').hide();
     		$('#title').hide();
 		$('#journal').hide();
@@ -29,7 +29,7 @@
 		$('#publisher').hide();
 		$('#howpublished').hide();
 		$('#note').hide();
-		$('#key').hide();
+		$('#keyname').hide();
 	}
 
 	$("#bibtype").change(function(event) {
@@ -88,14 +88,14 @@
 			$('label[for="month"]').show();
                         $('label[for="year"]').show();
 			$('label[for="note"]').show();
-			$('label[for="key"]').show();
+			$('label[for="keyname"]').show();
                         $('#author').show();
                         $('#title').show();
                         $('#howpublished').show();
                         $('#month').show();
                         $('#year').show();
                         $('#note').show();
-                        $('#key').show();
+                        $('#keyname').show();
                 }
 
 	});
@@ -157,7 +157,7 @@
         <label for="bibtype">Entry type</label>
         <select class="form-control" id="bibtype" name="bibtype">
             <c:forEach var="type" items="${types}">
-                <option value="${type.key}">${type.key}</option>
+                <option value="${type.keyname}">${type.keyname}</option>
             </c:forEach>
         </select>
     </div>
@@ -202,8 +202,8 @@
         <input type="text" class="form-control" id="note" name="note">
     </div>
     <div class="form-group">
-        <label for="key">Key</label>
-        <input type="text" class="form-control" id="key" name="key">
+        <label for="keyname">Key</label>
+        <input type="text" class="form-control" id="keyname" name="keyname">
     </div>
 
 

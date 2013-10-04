@@ -44,16 +44,16 @@ public class EntryTypeTest {
     @Test
     public void getAndSetKey() {
         EntryType entryType = new EntryType("magazine", new FieldType[0]);
-        entryType.setKey(null);
+        entryType.setTypeKey(null);
 
-        assertTrue(entryType.getKey() == null);
+        assertTrue(entryType.getTypeKey() == null);
 
-        entryType.setKey("");
+        entryType.setTypeKey("");
 
-        assertTrue(entryType.getKey().equals(""));
+        assertTrue(entryType.getTypeKey().equals(""));
 
-        entryType.setKey("111111111234554444");
+        entryType.setTypeKey("111111111234554444");
 
-        assertTrue(entryType.getKey().equals("111111111234554444"));
+        assertTrue(entryType.getTypeKey().equals("111111111234554444"));
     }
 }

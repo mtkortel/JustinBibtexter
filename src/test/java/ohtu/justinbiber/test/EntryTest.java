@@ -49,7 +49,7 @@ public class EntryTest {
         Entry entry = new Entry(entryType);
 
         assertTrue(entry.getType() == entryType);
-        assertTrue(entry.getKey() == null);
+        assertTrue(entry.getKeyname() == null);
 
     }
 
@@ -78,9 +78,9 @@ public class EntryTest {
         EntryType entryType = new EntryType("", new FieldType[0]);
         Entry entry = new Entry(entryType);
 
-        entry.setKey("newKey");
+        entry.setKeyname("newKey");
 
-        assertTrue(entry.getKey().equals("newKey"));
+        assertTrue(entry.getKeyname().equals("newKey"));
     }
     /* Minimal test for getValue method
      */

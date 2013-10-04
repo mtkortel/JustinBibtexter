@@ -23,4 +23,11 @@ public interface BibService {
  * @return 
  */
     public List<EntryType> getEntryTypes();
+    
+    /**
+     * Returns all entries that have certain key (ie. "authors")
+     * @param srchkey
+     * @return 
+     */
+    public List<Entry> findEntriesByKey(String srchkey);
 }
