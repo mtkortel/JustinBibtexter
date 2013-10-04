@@ -1,5 +1,7 @@
 package ohtu.justinbiber.domain;
-
+/**
+ * Defines the accepted input type to be either in TEXT or NUMBER form.
+ */
 public class ValueType {
     
     public enum Type {

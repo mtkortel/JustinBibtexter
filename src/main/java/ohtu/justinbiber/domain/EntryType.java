@@ -1,5 +1,7 @@
 package ohtu.justinbiber.domain;
-
+/**
+ * Contains a key and a list of types of the fields related to it.
+ */
 public class EntryType {
     private String key;
     private FieldType[] requiredFields;
