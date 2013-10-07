@@ -4,7 +4,6 @@
  */
 package ohtu.justinbiber.service;
 
-import com.avaje.ebean.annotation.Transactional;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
@@ -12,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import ohtu.justinbiber.domain.Entry;
 import ohtu.justinbiber.domain.EntryType;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -20,14 +20,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Transactional
 public class SqlBibService implements BibService, BibTypeService {
-    
+
     @PersistenceContext
     private EntityManager entityManager;
-    
+
     /**
      * Starts database connection
      * If wanted then will initialize database and set basic values
-     * 
+     *
      */
     @PostConstruct
     private void init(){
@@ -38,15 +38,15 @@ public class SqlBibService implements BibService, BibTypeService {
             FieldType author = new FieldType("author");
             FieldType title = new FieldType("title");
             FieldType booktitle = new FieldType("booktitle");
-            FieldType year = new FieldType("year", ValueType.Type.NUMBER);        
+            FieldType year = new FieldType("year", ValueType.Type.NUMBER);
             FieldType editor = new FieldType("editor");
-            FieldType publisher = new FieldType("publisher");    
+            FieldType publisher = new FieldType("publisher");
             FieldType journal = new FieldType("journal");
             FieldType howpublished = new FieldType("howpublished");
             FieldType month = new FieldType("month", ValueType.Type.NUMBER);
             FieldType note = new FieldType("note");
             FieldType key = new FieldType("key");
-            
+
             entityManager.merge(author);
             entityManager.merge(title);
             entityManager.merge(booktitle);
@@ -58,7 +58,7 @@ public class SqlBibService implements BibService, BibTypeService {
             entityManager.merge(month);
             entityManager.merge(note);
             entityManager.merge(key);
-            
+
             // Save EntryTypes
             EntryType inproceedings = new EntryType("inproceedings",
                 new FieldType[] {
@@ -67,7 +67,7 @@ public class SqlBibService implements BibService, BibTypeService {
                     booktitle,
                     year,
                 });
-        
+
             EntryType book = new EntryType("book",
                 new FieldType[] {
                     author,
@@ -75,7 +75,7 @@ public class SqlBibService implements BibService, BibTypeService {
                     publisher,
                     year
                 });
-        
+
             EntryType article = new EntryType("article",
                 new FieldType[] {
                    author,
@@ -83,7 +83,7 @@ public class SqlBibService implements BibService, BibTypeService {
                    journal,
                    year
                 });
-        
+
             EntryType misc = new EntryType("misc",
                 new FieldType[] {
                    author,
@@ -119,7 +119,7 @@ public class SqlBibService implements BibService, BibTypeService {
                 "SELECT e FROM EntryType e")
                 .getResultList();
     }
-    
+
     @Override
     public List<Entry> findEntriesByKey(String srchkey){
         return entityManager.createQuery(
@@ -144,6 +144,6 @@ public class SqlBibService implements BibService, BibTypeService {
                 .eq("typekey", key).findUnique();
         */
     }
-    
-    
+
+
 }

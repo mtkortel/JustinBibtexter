@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -21,10 +21,11 @@
         <spring.version>3.2.4.RELEASE</spring.version>
         <junit.version>4.11</junit.version>
         <selenium.version>2.35.0</selenium.version>
+        <easyb.version>1.5</easyb.version>
     </properties>
-    
+
     <dependencies>
-        
+
         <!-- spring -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -42,7 +43,7 @@
             <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
-        
+
         <!-- java ee -->
         <dependency>
             <groupId>javax</groupId>
@@ -55,7 +56,7 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-        
+
         <!-- junit -->
         <dependency>
             <groupId>junit</groupId>
@@ -63,7 +64,13 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-        
+        <dependency>
+            <groupId>org.easyb</groupId>
+            <artifactId>easyb-core</artifactId>
+            <version>${easyb.version}</version>
+            <scope>test</scope>
+        </dependency>
+
         <!-- selenium -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -77,35 +84,29 @@
             <version>${selenium.version}</version>
             <scope>test</scope>
         </dependency>
-        <!-- ebean -->
-        <dependency>  
-            <groupId>org.avaje</groupId>  
-            <artifactId>ebean</artifactId>  
-            <version>2.7.1</version>  
-        </dependency>   
-        
+
         <!-- Spring JPA-tuki -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>3.2.4.RELEASE</version>
-        </dependency>        
+            <version>${spring.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
-            <version>3.2.4.RELEASE</version>
-        </dependency>        
+            <version>${spring.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
-            <version>3.2.4.RELEASE</version>
-        </dependency>        
+            <version>${spring.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
             <version>1.4.1.RELEASE</version>
-        </dependency> 
-        
+        </dependency>
+
         <!-- EclipseLink JPA-tuki -->
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
@@ -117,21 +118,21 @@
             <artifactId>javax.persistence</artifactId>
             <version>2.1.0</version>
         </dependency>
-        
+
         <!-- Tietokantasovellus -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.3.173</version>
         </dependency>
-                            
+
     </dependencies>
 
     <build>
         <!-- final war name -->
         <finalName>justinbibtex</finalName>
-        
-        <plugins>    
+
+        <plugins>
             <!-- jetty configuration -->
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
@@ -162,7 +163,7 @@
                         <phase>pre-integration-test</phase>
                         <goals>
                             <goal>run</goal>
-                        </goals>    
+                        </goals>
                         <configuration>
                             <scanIntervalSeconds>0</scanIntervalSeconds>
                             <daemon>true</daemon>
@@ -177,7 +178,7 @@
                     </execution>
                 </executions>
             </plugin>
-            
+
             <!-- compiler configuration -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -201,29 +202,7 @@
                     </systemPropertyVariables>
                     <!-- for Ebean -->
                     <useSystemClassLoader>false</useSystemClassLoader>
-                </configuration>                
-            </plugin>
-            <!-- integration testing -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.16</version>
-                <executions>
-                    <execution>
-                        <id>failsafe-integration-tests</id>
-                        <phase>integration-test</phase>
-                        <goals>
-                            <goal>integration-test</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>failsafe-verify</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                </configuration>
             </plugin>
             <!-- put all dependencies to war -->
             <plugin>
@@ -233,32 +212,74 @@
             </plugin>
             <!-- enhance entity beans-->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>  
-                <artifactId>maven-antrun-plugin</artifactId>  
-                <executions>  
-                <execution>  
-                <id>compile</id>  
-                <phase>process-ebean-enhancement</phase>  
-                <configuration>  
-                <tasks>  
-                <property name="compile_classpath" refid="maven.compile.classpath" />  
-                <echo  
-                message="Ebean enhancing test classes debug level -----------------------------------" />  
-                <echo message="Classpath: ${compile_classpath}" />  
-                <taskdef name="ebeanEnhance"  
-                classname="com.avaje.ebean.enhance.ant.AntEnhanceTask"  
-                classpath="${compile_classpath}" />  
-                <ebeanEnhance classSource="${project.build.testOutputDirectory}"  
-                packages="org.avaje.demo.test.model.**" transformArgs="debug=1" />  
-                </tasks>  
-                <encoding>UTF-8</encoding>  
-                </configuration>  
-                <goals>  
-                <goal>run</goal>  
-                </goals>  
-                </execution>  
-                </executions>   
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>process-ebean-enhancement</phase>
+                        <configuration>
+                            <tasks>
+                                <property name="compile_classpath" refid="maven.compile.classpath" />
+                                <echo
+                                    message="Ebean enhancing test classes debug level -----------------------------------" />
+                                <echo message="Classpath: ${compile_classpath}" />
+                                <taskdef name="ebeanEnhance"
+                                         classname="com.avaje.ebean.enhance.ant.AntEnhanceTask"
+                                         classpath="${compile_classpath}" />
+                                <ebeanEnhance classSource="${project.build.testOutputDirectory}"
+                                              packages="org.avaje.demo.test.model.**" transformArgs="debug=1" />
+                            </tasks>
+                            <encoding>UTF-8</encoding>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+
+            <id>easyb</id>
+
+            <!-- When maven.test.skip is defined, don't run easyb tests. Ideally, it should check
+            for skipTests flag too,but maven profile activation doesn't support multiple variables.
+            More details is here http://jira.codehaus.org/browse/MNG-3328. There is also easyb ticket
+            created for this issue: http://code.google.com/p/easyb/issues/detail?id=192.-->
+            <activation>
+                <property>
+                    <name>!maven.test.skip</name>
+                </property>
+            </activation>
+
+            <build>
+                <plugins>
+                    <!-- integration testing -->
+                    <plugin>
+                        <groupId>org.easyb</groupId>
+                        <artifactId>maven-easyb-plugin</artifactId>
+                        <version>1.4</version>
+                        <executions>
+                            <execution>
+                                <phase>integration-test</phase>
+                                <goals>
+                                    <goal>test</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <storyType>html</storyType>
+                            <storyReport>${basedir}/target/easyb/easyb-report.html
+                            </storyReport>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+
+        </profile>
+    </profiles>
 </project>
