@@ -7,6 +7,7 @@ import ohtu.justinbiber.service.BibConvertService;
 import ohtu.justinbiber.service.BibService;
 import ohtu.justinbiber.service.BibTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class BibController {
  
+    @Value("${deployment.location}")
     @Autowired
     BibService bibService;
     @Autowired

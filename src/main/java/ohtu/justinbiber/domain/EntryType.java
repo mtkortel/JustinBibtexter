@@ -1,13 +1,16 @@
 package ohtu.justinbiber.domain;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Contains a key and a list of types of the fields related to it.
  */
 @Entity
-public class EntryType {
+@Table(name = "justin_entrytype")
+public class EntryType implements Serializable{
     
     @Id
     private Integer id;

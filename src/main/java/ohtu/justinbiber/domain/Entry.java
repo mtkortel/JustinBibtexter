@@ -1,16 +1,19 @@
 package ohtu.justinbiber.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 /**
  * Contains a key, an entry type object and a list of fields.
  * 
  */
 @Entity
-public class Entry {
+@Table(name = "justin_entry")
+public class Entry implements Serializable{
     
     @Id
     private Integer id;
