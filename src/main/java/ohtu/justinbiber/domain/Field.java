@@ -1,12 +1,27 @@
 package ohtu.justinbiber.domain;
+
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Contains the key and the value of a field.
  * 
  */
-public class Field {
+@Entity
+@Table(name = "justin_field")
+public class Field implements Serializable {
+    
+    @Id
+    private Integer id;
     
     private String key;
     private String value;
+    
+
+    public Field() {
+    }
 
     public Field(String key, String value) {
         this.key = key.toLowerCase();

@@ -1,12 +1,27 @@
 package ohtu.justinbiber.domain;
+
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 /**
  * Contains the value type of a key.
  * 
  */
-public class FieldType {
+@Entity
+@Table(name = "justin_fieldtype")
+public class FieldType implements Serializable {
     
+    @Id
+    private Integer id;
     private String key;
+    @ManyToOne
     private ValueType valueType;
+
+    public FieldType() {
+    }
 
     public FieldType(String key, ValueType valueType) {
         this.key = key;

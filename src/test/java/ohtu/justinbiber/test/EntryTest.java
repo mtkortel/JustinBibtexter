@@ -58,7 +58,7 @@ public class EntryTest {
 
         FieldType[] fields = new FieldType[8];
         EntryType type = new EntryType("unknown type", fields);
-        assertTrue(type.getRequiredFieldTypes().length == 8);
+        assertTrue(type.getRequiredFieldTypes().size() == 8);
 
     }
 

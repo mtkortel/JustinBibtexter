@@ -1,8 +1,12 @@
 package ohtu.justinbiber.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -10,23 +14,24 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "justin_entrytype")
-public class EntryType implements Serializable{
+public class EntryType implements Serializable {
     
     @Id
     private Integer id;
     
     private String typekey;
-    private FieldType[] requiredFields;
+    @OneToMany
+    private List<FieldType> requiredFields = new ArrayList<FieldType>();
 
     public EntryType() {
     }
 
     public EntryType(String typekey, FieldType[] requiredFields) {
         this.typekey = typekey.toLowerCase();
-        this.requiredFields = requiredFields;
+        this.requiredFields = Arrays.asList(requiredFields);
     }
 
-    public FieldType[] getRequiredFieldTypes() {
+    public List<FieldType> getRequiredFieldTypes() {
         return requiredFields;
     }
     

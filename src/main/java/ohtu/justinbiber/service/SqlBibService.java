@@ -4,25 +4,25 @@
  */
 package ohtu.justinbiber.service;
 
-import com.avaje.ebean.EbeanServer;
-import com.avaje.ebean.EbeanServerFactory;
-import com.avaje.ebean.config.DataSourceConfig;
-import com.avaje.ebean.config.ServerConfig;
+import com.avaje.ebean.annotation.Transactional;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import ohtu.justinbiber.domain.Entry;
 import ohtu.justinbiber.domain.EntryType;
-import ohtu.justinbiber.domain.FieldType;
-import ohtu.justinbiber.domain.ValueType;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author mtkortel
  */
-@Service
-public class SqlBibService implements BibService, BibTypeService  {
-    EbeanServer server;
+@Repository
+@Transactional
+public class SqlBibService implements BibService, BibTypeService {
+    
+    @PersistenceContext
+    private EntityManager entityManager;
     
     /**
      * Starts database connection
@@ -32,9 +32,9 @@ public class SqlBibService implements BibService, BibTypeService  {
     @PostConstruct
     private void init(){
         boolean init = true;
-        server = initializeDatabase(init);
         if (init){
             // Save FieldTypes
+            /*
             FieldType author = new FieldType("author");
             FieldType title = new FieldType("title");
             FieldType booktitle = new FieldType("booktitle");
@@ -47,17 +47,17 @@ public class SqlBibService implements BibService, BibTypeService  {
             FieldType note = new FieldType("note");
             FieldType key = new FieldType("key");
             
-            server.save(author);
-            server.save(title);
-            server.save(booktitle);
-            server.save(editor);
-            server.save(year);
-            server.save(publisher);
-            server.save(journal);
-            server.save(howpublished);
-            server.save(month);
-            server.save(note);
-            server.save(key);
+            entityManager.merge(author);
+            entityManager.merge(title);
+            entityManager.merge(booktitle);
+            entityManager.merge(editor);
+            entityManager.merge(year);
+            entityManager.merge(publisher);
+            entityManager.merge(journal);
+            entityManager.merge(howpublished);
+            entityManager.merge(month);
+            entityManager.merge(note);
+            entityManager.merge(key);
             
             // Save EntryTypes
             EntryType inproceedings = new EntryType("inproceedings",
@@ -94,84 +94,55 @@ public class SqlBibService implements BibService, BibTypeService  {
 		   note,
 		   key
                 });
-            server.save(inproceedings);
-            server.save(book);
-            server.save(article);
-            server.save(misc);
-            /*
-            EntryType e1 = new EntryType();
-            e1.setTypeKey("inproceedings");
-            server.save(e1);
-            e1 = new EntryType();
-            e1.setTypeKey("book");
-            server.save(e1);
-            e1 = new EntryType();
-            e1.setTypeKey("article");
-            server.save(e1);
-            e1 = new EntryType();
-            e1.setTypeKey("misc");
-            server.save(e1);
+            entityManager.merge(inproceedings);
+            entityManager.merge(book);
+            entityManager.merge(article);
+            entityManager.merge(misc);
+            entityManager.flush();
             */
         }
-    }
-    
-    private EbeanServer initializeDatabase(boolean dropAndCreateDatabase) {
-        ServerConfig config = new ServerConfig();
-        config.setName("justinDB");
-
-        DataSourceConfig sqLite = new DataSourceConfig();
-        ///TODO: Tänne asetukset
-        sqLite.setDriver("org.sqlite.JDBC");
-        sqLite.setUsername("justin");
-        sqLite.setPassword("bibtext");
-        sqLite.setUrl("jdbc:sqlite:beer.db");
-        config.setDataSourceConfig(sqLite);
-        //config.setDatabasePlatform(); //new SQLitePlatform());
-        //config.getDataSourceConfig().setIsolationLevel(Transaction.READ_UNCOMMITTED);
-
- 
-        if (dropAndCreateDatabase) {
-            config.setDdlGenerate(true);
-            config.setDdlRun(true);
-        }
-
-        config.setDefaultServer(false);
-        config.setRegister(false);
-
-        config.addClass(Entry.class);
-        config.addClass(EntryType.class);
-
-        return EbeanServerFactory.create(config);
     }
 
     @Override
     public List<Entry> getEntries() {
-        List<Entry> entries = server.find(Entry.class).findList();
-        return entries;
+        return entityManager.createQuery("SELECT e FROM Entry e").getResultList();
     }
 
     @Override
     public void addEntry(Entry entry) {
-        server.save(entry);
+        entityManager.merge(entry);
     }
 
     @Override
     public List<EntryType> getEntryTypes() {
-        List<EntryType> types = server.find(EntryType.class).findList();
-        return types;
+        return entityManager.createQuery(
+                "SELECT e FROM EntryType e")
+                .getResultList();
     }
     
     @Override
     public List<Entry> findEntriesByKey(String srchkey){
+        return entityManager.createQuery(
+                "SELECT e FROM Entry e WHERE e.keyname = :srchkey")
+                .setParameter("srchkey", srchkey)
+                .getResultList();
+        /*
         List<Entry> entries = server.find(Entry.class)
                 .where().eq("key", srchkey).findList();
         return entries;
+        */
     }
 
     @Override
     public EntryType getEntryType(String key) {
+        return (EntryType)entityManager.createQuery(
+                "SELECT e FROM EntryType e where e.typekey = :key")
+                .setParameter("key", key)
+                .getSingleResult();
+        /*
         return server.find(EntryType.class).where()
                 .eq("typekey", key).findUnique();
+        */
     }
     
     
