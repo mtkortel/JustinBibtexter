@@ -23,14 +23,14 @@ public class BibController {
     BibConvertService bibConvert;
     @Autowired
     BibTypeService bibTypeService;
-    
+
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String list(Model model) {
         List<Entry> entries = bibService.getEntries();
         model.addAttribute("entries", entries);
         return "list";
     }
-    
+
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String add(Model model){
         List<EntryType> types = bibService.getEntryTypes();
@@ -39,13 +39,13 @@ public class BibController {
     }
     /**
      * Lisätään syötetty viitetieto listalle ja palataan list-näyttöön
-     * 
+     *
      * @param parameter
-     * @return 
+     * @return
      */
     @RequestMapping(value = "add-bibtext", method = RequestMethod.POST)
-    public String addBibtext(@RequestParam String bibtype, @RequestParam String id, 
-            @RequestParam String author, @RequestParam String title, 
+    public String addBibtext(@RequestParam String bibtype, @RequestParam String id,
+            @RequestParam String author, @RequestParam String title,
             @RequestParam String journal, @RequestParam String booktitle,
 	    @RequestParam String year, @RequestParam String month,
 	    @RequestParam String publisher, @RequestParam String howpublished,
@@ -67,7 +67,7 @@ public class BibController {
         bibService.addEntry(entry);
         return "redirect:list";
     }
-    
+
     @RequestMapping(value = "view-bibtext", method = RequestMethod.GET)
     public String preview(Model model){
         String prev = bibConvert.getBibtext(bibService.getEntries());
