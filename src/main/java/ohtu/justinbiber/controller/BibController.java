@@ -7,7 +7,6 @@ import ohtu.justinbiber.service.BibConvertService;
 import ohtu.justinbiber.service.BibService;
 import ohtu.justinbiber.service.BibTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class BibController {
-    
+
     @Autowired
     BibService bibService;
     @Autowired
@@ -33,7 +32,7 @@ public class BibController {
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String add(Model model){
-        List<EntryType> types = bibService.getEntryTypes();
+        List<EntryType> types = bibTypeService.getEntryTypes();
         model.addAttribute("types", types);
         return "addnew";
     }

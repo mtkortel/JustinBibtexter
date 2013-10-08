@@ -5,39 +5,39 @@
        xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/jdbc 
+       xsi:schemaLocation="http://www.springframework.org/schema/jdbc
                 http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
-                http://www.springframework.org/schema/beans 
+                http://www.springframework.org/schema/beans
                 http://www.springframework.org/schema/beans/spring-beans.xsd
-                http://www.springframework.org/schema/tx 
+                http://www.springframework.org/schema/tx
                 http://www.springframework.org/schema/tx/spring-tx.xsd
                 http://www.springframework.org/schema/data/jpa
                 http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
                 http://www.springframework.org/schema/context
                 http://www.springframework.org/schema/context/spring-context.xsd">
- 
+
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="persistenceUnitName" value="persistenceUnitDev" /> 
+        <property name="persistenceUnitName" value="persistenceUnitDev" />
         <property name="dataSource" ref="dataSource" />
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter"/>
         </property>
     </bean>
-    
+
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
     <tx:annotation-driven transaction-manager="transactionManager" />
-    
+
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
-    
+
     <!-- tuotantoympäristön konfiguraatio -->
     <beans profile="production">
         <!-- ympäristöön liittyvä konfiguraatiotiedosto -->
         <context:property-placeholder location="classpath:production.properties"/>
-        
+
         <!-- luodaan tietokantakonfiguraatio luetun konfiguraatiotiedoston perusteella -->
         <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
             <property name="driverClassName" value="org.postgresql.Driver"/>
@@ -46,13 +46,30 @@
             <property name="password" value="${database.password}"/>
         </bean>
     </beans>
-    
+
     <!-- oletuskonfiguraatio -->
     <beans profile="dev,default">
         <!-- ympäristöön liittyvä konfiguraatiotiedosto -->
         <context:property-placeholder location="classpath:development.properties"/>
 
-        <!-- muistiin ladattava tietokanta -->
-        <jdbc:embedded-database id="dataSource" type="H2"/>
+        <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+            <property name="driverClass" value="org.h2.Driver"/>
+            <property name="url" value="jdbc:h2:mem:justin;DB_CLOSE_DELAY=-1"/>
+        </bean>
+        <!-- enable database browsing -->
+        <bean id="h2Web" depends-on="dataSource"
+              class="org.h2.tools.Server"
+              factory-method="createWebServer"
+              init-method="start"
+              destroy-method="stop">
+            <constructor-arg value="-web,-webPort,8092" />
+        </bean>
+        <bean id="h2Tcp" depends-on="dataSource"
+              class="org.h2.tools.Server"
+              factory-method="createTcpServer"
+              init-method="start"
+              destroy-method="stop">
+            <constructor-arg value="-tcp,-tcpPort,8091" />
+        </bean>
     </beans>
 </beans>

@@ -29,7 +29,7 @@
 //    Optional fields: author, title, howpublished, month, year, note, key
 
 	$(document).ready(function() {
-		
+
 		// EntryType ja FieldType arrayt pitaisi saada Java puolelta tahan..
 
 		var EntryType = {
@@ -58,17 +58,17 @@
 				$('#content').append('<div class="form-group"><label for="' + key + '">' + key.substr(0,1).toUpperCase() + key.substr(1) + '</label><input type="' + value + '" class="form-control" id="' + key + '" name="' + key + '"></div>');
 			});
 		}
-           
+
 		function hide_all() {
 			$('label').hide();
-                        
+
 			$('input').hide();
 //			$('input').attr('disabled','disabled').hide();
 
 			$('label[for="id"]').show();
 			$('#id').removeAttr('disabled').show();
 
-			$('input[type="submit"]').removeAttr('disabled').show();                
+			$('input[type="submit"]').removeAttr('disabled').show();
 		}
 
 		$("#bibtype").change(function(event) {
@@ -94,7 +94,7 @@
         <label for="bibtype">Entry type</label>
         <select class="form-control" id="bibtype" name="bibtype">
             <c:forEach var="type" items="${types}">
-                <option value="${type.keyname}">${type.keyname}</option>
+                <option value="${type.typeKey}">${type.typeKey}</option>
             </c:forEach>
         </select>
     </div>

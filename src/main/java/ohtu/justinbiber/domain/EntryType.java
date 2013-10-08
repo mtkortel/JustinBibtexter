@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -15,11 +17,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "justin_entrytype")
 public class EntryType implements Serializable {
-    
+
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    
-    private String typekey;
+
+    private String typeKey;
     @OneToMany
     private List<FieldType> requiredFields = new ArrayList<FieldType>();
 
@@ -27,26 +30,26 @@ public class EntryType implements Serializable {
     }
 
     public EntryType(String typekey, FieldType[] requiredFields) {
-        this.typekey = typekey.toLowerCase();
+        this.typeKey = typekey.toLowerCase();
         this.requiredFields = Arrays.asList(requiredFields);
     }
 
     public List<FieldType> getRequiredFieldTypes() {
         return requiredFields;
     }
-    
+
     /**
      * @return the key
      */
     public String getTypeKey() {
-        return typekey;
+        return typeKey;
     }
 
     /**
      * @param key the key to set
      */
     public void setTypeKey(String key) {
-        this.typekey = key;
+        this.typeKey = key;
     }
 
     /**
@@ -62,4 +65,13 @@ public class EntryType implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public List<FieldType> getRequiredFields() {
+        return requiredFields;
+    }
+
+    public void setRequiredFields(List<FieldType> requiredFields) {
+        this.requiredFields = requiredFields;
+    }
+
 }

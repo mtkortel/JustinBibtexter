@@ -5,6 +5,7 @@
 package ohtu.justinbiber.test;
 
 import ohtu.justinbiber.domain.FieldType;
+import ohtu.justinbiber.domain.ValueType;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -42,7 +43,8 @@ public class FieldTypeTest {
 
     @Test
     public void FieldTypeSetKeyWorks() {
-        FieldType someType = new FieldType("autobiography");
+        ValueType text = new ValueType(ValueType.Type.TEXT);
+        FieldType someType = new FieldType("autobiography", text);
 
         assertTrue(someType.getKey().equals("autobiography"));
     }

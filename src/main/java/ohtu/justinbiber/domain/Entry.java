@@ -4,24 +4,27 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 /**
  * Contains a key, an entry type object and a list of fields.
- * 
+ *
  */
 @Entity
 @Table(name = "justin_entry")
 public class Entry implements Serializable {
-    
+
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    
+
     @ManyToOne
-    private EntryType type;
-    private String keyname;
+    private EntryType entryType;
+    private String entryKey;
     @OneToMany
     private List<Field> fields = new ArrayList<Field>();
 
@@ -29,27 +32,27 @@ public class Entry implements Serializable {
     }
 
     public Entry(EntryType type) {
-        this.type = type;
+        this.entryType = type;
     }
-    
+
     public void addField(String key, String value) {
         fields.add(new Field(key, value));
     }
 
     public EntryType getType() {
-        return type;
+        return entryType;
     }
 
     public void setType(EntryType type) {
-        this.type = type;
+        this.entryType = type;
     }
 
     public String getKeyname() {
-        return keyname;
+        return entryKey;
     }
 
     public void setKeyname(String key) {
-        this.keyname = key;
+        this.entryKey = key;
     }
 
     public List<Field> getFields() {
@@ -59,7 +62,7 @@ public class Entry implements Serializable {
      * Searches for a key from List<Field> fields,
      * if the key is found, returns the value stored with it.
      * @param key
-     * @return 
+     * @return
      */
     public String getValue(String key) {
         String k = key.toLowerCase();
@@ -70,7 +73,7 @@ public class Entry implements Serializable {
         }
         return null;
     }
-    
+
     public String getTitle() {
         return getValue("title");
     }
@@ -88,5 +91,21 @@ public class Entry implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
+    public EntryType getEntryType() {
+        return entryType;
+    }
+
+    public void setEntryType(EntryType entryType) {
+        this.entryType = entryType;
+    }
+
+    public String getEntryKey() {
+        return entryKey;
+    }
+
+    public void setEntryKey(String entryKey) {
+        this.entryKey = entryKey;
+    }
+
 }
