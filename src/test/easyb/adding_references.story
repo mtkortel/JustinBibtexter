@@ -1,7 +1,11 @@
 import ohtu.justinbiber.*
 import org.openqa.selenium.*
+import org.openqa.selenium.support.ui.WebDriverWait
 import org.openqa.selenium.htmlunit.HtmlUnitDriver
 import com.gargoylesoftware.htmlunit.WebClient
+import org.openqa.selenium.support.ui.Select
+
+
 
 description 'User can add different types of references'
 
@@ -49,13 +53,15 @@ scenario "user can add an inproceedings-type reference with required fields", {
 scenario "user can not add a reference with the required fields empty", {
     given 'command add new selected', {
         driver.get("http://localhost:" + port)
+        driver.findElement(By.linkText("Add new")).click()
     }
 
     when 'required fields are left empty', {
+           driver.findElement(By.cssSelector("input[type=\"submit\"]")).click()
     }
 
     then 'new reference is not added to the system', {
-        driver.getPageSource().contains("joku virheilmoitus").shouldBe true
+        driver.getPageSource().contains("Required fields").shouldBe true
     }
 }
 
@@ -64,26 +70,32 @@ scenario "user can add a article-type reference", {
         driver.get("http://localhost:" + port)
         element = driver.findElement(By.linkText("Add new"));
         element.click();
-        // element = driver.findElement(By.id("bibtype");
-        // select = new Select(element);
-        // select.selectByVisibleText("article");
+
+
+        element  = driver.findElement(By.id("bibtype"));
+        element.click();
+        
+        Select select = new Select(driver.findElement(By.xpath("//select")));
+        select.deselectAll();
+        select.selectByVisibleText("article");
+
     }
 
     when 'required fields are filled somewhat convincingly', {
-        element = driver.findElement(By.name("author"));
+        element = driver.findElement(By.name("article_author"));
         element.sendKeys("Jacque Pyles");
-        element = driver.findElement(By.name("title"));
+        element = driver.findElement(By.name("article_title"));
         element.sendKeys("Just Friends? - A Case Study");
-        element = driver.findElement(By.name("journal"));
+        element = driver.findElement(By.name("article_journal"));
         element.sendKeys("Journal of Justin's Early Life Relationship Failures");
-        element = driver.findElement(By.name("year"));
+        element = driver.findElement(By.name("article_year"));
         element.sendKeys("2009");
 
         element = driver.findElement(By.name("submit"));
         element.submit();
     }
 
-    then 'new reference is not added to the system', {
+    then 'new reference is added to the system', {
         driver.getPageSource().contains("Jacque Pyles").shouldBe true
     }
 }
@@ -112,7 +124,7 @@ scenario "user can add references with special characters", {
         element.submit();
     }
 
-    then 'new reference is not added to the system', {
+    then 'new reference is added to the system', {
         driver.getPageSource().contains("Äiti Åkerlund").shouldBe true
         driver.getPageSource().contains("Elä hyvä elämä").shouldBe true
         driver.getPageSource().contains("tienaa \$5\$5\$5\$5\$5").shouldBe true
