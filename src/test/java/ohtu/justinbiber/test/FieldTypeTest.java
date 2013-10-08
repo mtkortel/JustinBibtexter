@@ -46,6 +46,6 @@ public class FieldTypeTest {
         ValueType text = new ValueType(ValueType.Type.TEXT);
         FieldType someType = new FieldType("autobiography", text);
 
-        assertTrue(someType.getKey().equals("autobiography"));
+        assertTrue(someType.getFieldKey().equals("autobiography"));
     }
 }

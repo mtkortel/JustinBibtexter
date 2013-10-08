@@ -19,7 +19,7 @@ public class SqlBibTypeService implements BibTypeService {
     @Transactional(readOnly = true)
     public List<EntryType> getEntryTypes() {
         return entityManager.createQuery(
-                "SELECT e FROM EntryType e")
+                "SELECT e FROM EntryType e ORDER BY e.id")
                 .getResultList();
     }
 

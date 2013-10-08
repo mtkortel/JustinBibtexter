@@ -19,7 +19,7 @@ public class FieldType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String typeKey;
+    private String fieldKey;
     @ManyToOne
     private ValueType valueType;
 
@@ -27,12 +27,16 @@ public class FieldType implements Serializable {
     }
 
     public FieldType(String key, ValueType valueType) {
-        this.typeKey = key;
+        this.fieldKey = key;
         this.valueType = valueType;
     }
-    
-    public String getKey() {
-        return typeKey;
+
+    public void setFieldKey(String key) {
+        this.fieldKey = key;
+    }
+
+    public String getFieldKey() {
+        return fieldKey;
     }
 
     public ValueType getValueType() {

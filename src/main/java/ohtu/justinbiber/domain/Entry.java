@@ -47,14 +47,6 @@ public class Entry implements Serializable {
         this.entryType = type;
     }
 
-    public String getKeyname() {
-        return entryKey;
-    }
-
-    public void setKeyname(String key) {
-        this.entryKey = key;
-    }
-
     public List<Field> getFields() {
         return fields;
     }
@@ -105,7 +97,7 @@ public class Entry implements Serializable {
     }
 
     public void setEntryKey(String entryKey) {
-        this.entryKey = entryKey;
+        this.entryKey = entryKey.toLowerCase();
     }
 
 }

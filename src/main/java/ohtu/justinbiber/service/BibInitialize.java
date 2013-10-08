@@ -44,7 +44,8 @@ public class BibInitialize {
             author,
             title,
             booktitle,
-            year,}));
+            year
+        }));
         EntryType book = manager.addEntryType(new EntryType("book",
                 new FieldType[]{
             author,

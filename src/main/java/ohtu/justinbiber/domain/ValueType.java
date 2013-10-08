@@ -43,4 +43,14 @@ public class ValueType implements Serializable {
         this.id = id;
     }
 
+    public String getTypeString() {
+        switch (type) {
+            case NUMBER:
+                return "number";
+            case TEXT:
+                return "text";
+        }
+        return null;
+    }
+
 }

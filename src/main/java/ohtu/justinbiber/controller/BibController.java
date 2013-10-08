@@ -1,6 +1,7 @@
 package ohtu.justinbiber.controller;
 
 import java.util.List;
+import java.util.Map;
 import ohtu.justinbiber.domain.Entry;
 import ohtu.justinbiber.domain.EntryType;
 import ohtu.justinbiber.service.BibConvertService;
@@ -43,32 +44,20 @@ public class BibController {
      * @return
      */
     @RequestMapping(value = "add-bibtext", method = RequestMethod.POST)
-    public String addBibtext(@RequestParam String bibtype, @RequestParam String id,
-            @RequestParam String author, @RequestParam String title,
-            @RequestParam String journal, @RequestParam String booktitle,
-	    @RequestParam String year, @RequestParam String month,
-	    @RequestParam String publisher, @RequestParam String howpublished,
-	    @RequestParam String note, @RequestParam String key
-	) {
-        EntryType inproceedings = bibTypeService.getEntryType("inproceedings");
-        Entry entry = new Entry(inproceedings);
-        entry.setKeyname(id);
-        entry.addField("author", author);
-        entry.addField("title", title);
-	entry.addField("journal", journal);
-        entry.addField("booktitle", booktitle);
-        entry.addField("year", year);
-	entry.addField("month", month);
-	entry.addField("publisher", publisher);
-	entry.addField("howpublished", howpublished);
-	entry.addField("note", note);
-        entry.addField("key", key);
+    public String addBibtext(@RequestParam Map<String, String> params) {
+        Entry entry = new Entry(bibTypeService.getEntryType(params.get("bibtype")));
+        entry.setEntryKey(params.get("key"));
+        for (String key: params.keySet()) {
+            if (!key.equals("bibtype") && !key.equals("key")) {
+                entry.addField(key, params.get(key));
+            }
+        }
         bibService.addEntry(entry);
         return "redirect:list";
     }
 
     @RequestMapping(value = "view-bibtext", method = RequestMethod.GET)
-    public String preview(Model model){
+    public String preview(Model model) {
         String prev = bibConvert.getBibtext(bibService.getEntries());
         model.addAttribute("preview", prev);
         return "preview";

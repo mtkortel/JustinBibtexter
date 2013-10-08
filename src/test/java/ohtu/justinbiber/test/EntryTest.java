@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
  * @author danipallo
  */
 public class EntryTest {
-    
+
     public EntryTest() {
     }
 
@@ -45,11 +45,11 @@ public class EntryTest {
     @Test
     public void constructAnEntry() {
         EntryType entryType = new EntryType("", new FieldType[0]);
-        
+
         Entry entry = new Entry(entryType);
 
         assertTrue(entry.getType() == entryType);
-        assertTrue(entry.getKeyname() == null);
+        assertTrue(entry.getEntryKey() == null);
 
     }
 
@@ -78,9 +78,9 @@ public class EntryTest {
         EntryType entryType = new EntryType("", new FieldType[0]);
         Entry entry = new Entry(entryType);
 
-        entry.setKeyname("newKey");
+        entry.setEntryKey("newKey");
 
-        assertTrue(entry.getKeyname().equals("newKey"));
+        assertTrue(entry.getEntryKey().equals("newkey"));
     }
     /* Minimal test for getValue method
      */

@@ -21,14 +21,14 @@ public class BibConvertService {
     Mappings map;
     @Autowired
     BibService bib;
-    
+
     public String getBibtext(List<Entry> entries){
         StringBuilder sb = new StringBuilder();
         for(Entry entry: entries){
             sb.append("@").append(entry.getType().getTypeKey().toString()).append("{");
-            sb.append(entry.getKeyname()).append(",\n");
+            sb.append(entry.getEntryKey()).append(",\n");
             for(Field field: entry.getFields()){
-                sb.append(field.getKey().toString()).append(" = {");
+                sb.append('\t').append(field.getKey().toString()).append(" = {");
                 sb.append(field.getValue().toString()).append("},\n");
             }
             sb.append("}\n\n");
@@ -43,13 +43,13 @@ public class BibConvertService {
     }
 }
     /*
-     
+
      @inproceedings{VPL11,
      author = {Vihavainen, Arto and Paksula, Matti and Luukkainen, Matti},
      title = {Extreme Apprenticeship Method in Teaching Programming for Beginners.},
      year = {2011},
      booktitle = {SIGCSE '11: Proceedings of the 42nd SIGCSE technical symposium on Computer science education},
      }
-     
+
      */
 
