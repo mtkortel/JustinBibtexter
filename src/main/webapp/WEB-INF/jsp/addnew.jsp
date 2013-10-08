@@ -23,14 +23,14 @@
         <div class="fields ${type.typeKey}">
             <c:forEach var="field" items="${type.requiredFieldTypes}">
                 <div class="form-group">
-                    <label for="${field.fieldKey}">${field.fieldKey}</label>
-                    <input type="${field.valueType.typeString}" class="form-control" id="${field.fieldKey}" name="${field.fieldKey}" disabled>
+                    <label for="${type.typeKey}_${field.fieldKey}">${field.fieldKey}</label>
+                    <input type="${field.valueType.typeString}" class="form-control" id="${type.typeKey}_${field.fieldKey}" name="${type.typeKey}_${field.fieldKey}" disabled>
                 </div>
             </c:forEach>
         </div>
     </c:forEach>
     <div class="text-right">
-        <input type="submit" class="btn btn-primary" value="Submit"/>
+        <input type="submit" class="btn btn-primary" value="Submit">
         <a class="btn btn-default" href="list">Cancel</a>
     </div>
 </form>

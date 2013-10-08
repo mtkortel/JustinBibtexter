@@ -1,14 +1,22 @@
 import ohtu.justinbiber.*
 import org.openqa.selenium.*
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver
+import com.gargoylesoftware.htmlunit.WebClient
 
 description 'User can add different types of references'
 
+port = System.getProperty("jetty.port", "8090")
+driver = new HtmlUnitDriver() {
+    protected WebClient modifyWebClient(final WebClient client) {
+        client.setCssEnabled(false)
+        return client;
+    }
+}
+driver.setJavascriptEnabled(true)
+
 scenario "user can go to webapp and look at the page in awe", {
     given 'user has navigated to the site', {
-        driver = new HtmlUnitDriver();
-        driver.get("http://localhost:8080");
-
+        driver.get("http://localhost:" + port)
     }
 
     when 'nothing else in particular', {
@@ -21,37 +29,26 @@ scenario "user can go to webapp and look at the page in awe", {
 
 scenario "user can add an inproceedings-type reference with required fields", {
     given 'command add new selected and inproceedings selected', {
-        driver = new HtmlUnitDriver();
-        driver.get("http://localhost:8080");
-        element = driver.findElement(By.linkText("Add new"));       
-        element.click();
-        // element = driver.findElement(By.id("bibtype");
-        // select = new Select(element);
-        // select.selectByVisibleText("inproceedings");
-}
+        driver.get("http://localhost:" + port)
+        driver.findElement(By.linkText("Add new")).click()
+    }
 
     when 'required fields are filled', {
-    
-        element = driver.findElement(By.name("author"));
-        element.sendKeys("Selena Gomez");
-        element = driver.findElement(By.name("title"));
-        element.sendKeys("ak");
-        element = driver.findElement(By.name("booktitle"));
-        element.sendKeys("Tell Me Something I Don't Know");
-        element = driver.findElement(By.name("year"));
-        element.sendKeys("2004");
-
-        element = driver.findElement(By.name("submit"));
-        element.submit();
+        driver.findElement(By.id("inproceedings_author")).sendKeys("Selena Gomez")
+        driver.findElement(By.id("inproceedings_title")).sendKeys("ak")
+        driver.findElement(By.id("inproceedings_booktitle")).sendKeys("Tell Me Something I Don't Know")
+        driver.findElement(By.id("inproceedings_year")).sendKeys("2004")
+        driver.findElement(By.cssSelector("input[type=\"submit\"]")).click()
     }
 
-   then 'new reference is added to the system', {
-         driver.getPageSource().contains("Selena Gomez").shouldBe true
+    then 'new reference is added to the system', {
+        driver.getPageSource().contains("Selena Gomez").shouldBe true
     }
-} 
+}
 
 scenario "user can not add a reference with the required fields empty", {
     given 'command add new selected', {
+        driver.get("http://localhost:" + port)
     }
 
     when 'required fields are left empty', {
@@ -64,10 +61,8 @@ scenario "user can not add a reference with the required fields empty", {
 
 scenario "user can add a article-type reference", {
     given 'command add new selected and type article selected', {
-        driver = new HtmlUnitDriver();
-       
-        driver.get("http://localhost:8080");
-        element = driver.findElement(By.linkText("Add new"));       
+        driver.get("http://localhost:" + port)
+        element = driver.findElement(By.linkText("Add new"));
         element.click();
         // element = driver.findElement(By.id("bibtype");
         // select = new Select(element);
@@ -75,7 +70,7 @@ scenario "user can add a article-type reference", {
     }
 
     when 'required fields are filled somewhat convincingly', {
-            element = driver.findElement(By.name("author"));
+        element = driver.findElement(By.name("author"));
         element.sendKeys("Jacque Pyles");
         element = driver.findElement(By.name("title"));
         element.sendKeys("Just Friends? - A Case Study");
@@ -95,10 +90,8 @@ scenario "user can add a article-type reference", {
 
 scenario "user can add references with special characters", {
     given 'command add new selected and type book selected', {
-        driver = new HtmlUnitDriver();
-       
-        driver.get("http://localhost:8080");
-        element = driver.findElement(By.linkText("Add new"));       
+        driver.get("http://localhost:" + port)
+        element = driver.findElement(By.linkText("Add new"));
         element.click();
         // element = driver.findElement(By.id("bibtype");
         // select = new Select(element);

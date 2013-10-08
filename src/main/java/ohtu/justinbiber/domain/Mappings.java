@@ -4,14 +4,13 @@ import java.util.HashMap;
 import org.springframework.stereotype.Service;
 /**
  * Enables the use of special characters (ä,ö,å,...) in the program.
- * 
+ *
  */
 @Service
 public class Mappings {
   private HashMap<String, String> mappings = new HashMap<String, String>();
-  
+
   public Mappings(){
-      
   }
     /**
      * Replaces the special characters met in a string with a code
@@ -952,7 +951,7 @@ public class Mappings {
     mappings.put("\u1EF8","\\~{Y}"); // LATIN CAPITAL LETTER Y WITH TILDE
     mappings.put("\u1EF9","\\~{y}"); // LATIN SMALL LETTER Y WITH TILDE
     }
- 
+
     public String getLatex(char c){
         String unicode = toUnicode(c);
         return mappings.get(unicode);
@@ -961,5 +960,5 @@ public class Mappings {
         return String.format("\\u%04x", (int) ch);
     }
 */
-  
+
 }

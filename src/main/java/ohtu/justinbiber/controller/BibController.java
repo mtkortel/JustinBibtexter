@@ -45,11 +45,16 @@ public class BibController {
      */
     @RequestMapping(value = "add-bibtext", method = RequestMethod.POST)
     public String addBibtext(@RequestParam Map<String, String> params) {
-        Entry entry = new Entry(bibTypeService.getEntryType(params.get("bibtype")));
+        String type = params.get("bibtype");
+        Entry entry = new Entry(bibTypeService.getEntryType(type));
         entry.setEntryKey(params.get("key"));
         for (String key: params.keySet()) {
             if (!key.equals("bibtype") && !key.equals("key")) {
-                entry.addField(key, params.get(key));
+                String value = params.get(key);
+                if (!value.isEmpty()) {
+                    String shortKey = key.substring(type.length() + 1);
+                    entry.addField(shortKey, value);
+                }
             }
         }
         bibService.addEntry(entry);

@@ -84,6 +84,12 @@
             <version>${selenium.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>net.sourceforge.htmlunit</groupId>
+            <artifactId>htmlunit</artifactId>
+            <version>2.12</version>
+            <scope>test</scope>
+        </dependency>
 
         <!-- Spring JPA-tuki -->
         <dependency>
@@ -276,6 +282,9 @@
                             <storyType>html</storyType>
                             <storyReport>${basedir}/target/easyb/easyb-report.html
                             </storyReport>
+                            <systemPropertyVariables>
+                                <jetty.port>${jetty.port}</jetty.port>
+                            </systemPropertyVariables>
                         </configuration>
                     </plugin>
                 </plugins>
