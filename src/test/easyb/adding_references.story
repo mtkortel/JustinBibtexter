@@ -168,4 +168,37 @@ scenario "user can add references with special characters", {
         driver.getPageSource().contains("123").shouldBe true
     }
     }
+        scenario "user can add misc with special characters and review of it is ok", {
+    given 'command add new selected and type misc selected', {
+        driver.get("http://localhost:" + port)
+        element = driver.findElement(By.linkText("Add new"));
+        element.click();
+         element  = driver.findElement(By.id("bibtype"));
+        element.click();
+        
+        Select select = new Select(driver.findElement(By.xpath("//select")));
+        select.selectByVisibleText("misc");
+    }
+
+    when 'required fields are filled and submitted', {
+        element = driver.findElement(By.name("misc_author"));
+        element.sendKeys("seppo");
+        element = driver.findElement(By.name("misc_title"));
+        element.sendKeys("Äiti lähetä \$5\$5\$5\$5\$5");
+        element = driver.findElement(By.name("misc_year"));
+        element.sendKeys("123");
+
+        driver.findElement(By.cssSelector("input[type=\"submit\"]")).click()
+         
+        element = driver.findElement(By.linkText("Preview"));
+        element.click();       
+        
+    }
+
+    then 'new reference seems right in bibtex preview', {
+       driver.getPageSource().contains("author = {seppo},").shouldBe true
+       driver.getPageSource().contains("@misc{,").shouldBe true
+        driver.getPageSource().contains("}").shouldBe true
+    }
+    }
 }
