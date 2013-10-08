@@ -65,7 +65,7 @@ scenario "user can not add a reference with the required fields empty", {
     }
 }
 
-scenario "user can add a article-type reference", {
+scenario "user can add an article-type reference", {
     given 'command add new selected and type article selected', {
         driver.get("http://localhost:" + port)
         element = driver.findElement(By.linkText("Add new"));
@@ -76,7 +76,6 @@ scenario "user can add a article-type reference", {
         element.click();
         
         Select select = new Select(driver.findElement(By.xpath("//select")));
-        select.deselectAll();
         select.selectByVisibleText("article");
 
     }
@@ -91,8 +90,7 @@ scenario "user can add a article-type reference", {
         element = driver.findElement(By.name("article_year"));
         element.sendKeys("2009");
 
-        element = driver.findElement(By.name("submit"));
-        element.submit();
+          driver.findElement(By.cssSelector("input[type=\"submit\"]")).click()
     }
 
     then 'new reference is added to the system', {
@@ -105,23 +103,24 @@ scenario "user can add references with special characters", {
         driver.get("http://localhost:" + port)
         element = driver.findElement(By.linkText("Add new"));
         element.click();
-        // element = driver.findElement(By.id("bibtype");
-        // select = new Select(element);
-        // select.selectByVisibleText("book");
+         element  = driver.findElement(By.id("bibtype"));
+        element.click();
+        
+        Select select = new Select(driver.findElement(By.xpath("//select")));
+        select.selectByVisibleText("book");
     }
 
     when 'required fields are filled', {
-        element = driver.findElement(By.name("author"));
+        element = driver.findElement(By.name("book_author"));
         element.sendKeys("Äiti Åkerlund");
-        element = driver.findElement(By.name("title"));
+        element = driver.findElement(By.name("book_title"));
         element.sendKeys("Elä hyvä elämä ja tienaa \$5\$5\$5\$5\$5");
-        element = driver.findElement(By.name("publisher"));
+        element = driver.findElement(By.name("book_publisher"));
         element.sendKeys("Öisin nukutaan kustannus");
-        element = driver.findElement(By.name("year"));
+        element = driver.findElement(By.name("book_year"));
         element.sendKeys("1886");
 
-        element = driver.findElement(By.name("submit"));
-        element.submit();
+         driver.findElement(By.cssSelector("input[type=\"submit\"]")).click()
     }
 
     then 'new reference is added to the system', {
@@ -129,5 +128,44 @@ scenario "user can add references with special characters", {
         driver.getPageSource().contains("Elä hyvä elämä").shouldBe true
         driver.getPageSource().contains("tienaa \$5\$5\$5\$5\$5").shouldBe true
         driver.getPageSource().contains("Öisin nukutaan").shouldBe true
+    }
+    
+    scenario "user can add misc with special characters", {
+    given 'command add new selected and type misc selected', {
+        driver.get("http://localhost:" + port)
+        element = driver.findElement(By.linkText("Add new"));
+        element.click();
+         element  = driver.findElement(By.id("bibtype"));
+        element.click();
+        
+        Select select = new Select(driver.findElement(By.xpath("//select")));
+        select.selectByVisibleText("misc");
+    }
+
+    when 'required fields are filled', {
+        element = driver.findElement(By.name("misc_author"));
+        element.sendKeys("Åke Böyhä");
+        element = driver.findElement(By.name("misc_title"));
+        element.sendKeys("Äiti lähetä \$5\$5\$5\$5\$5");
+        element = driver.findElement(By.name("misc_howpublished"));
+        element.sendKeys("pulloposti");
+        element = driver.findElement(By.name("misc_month"));
+        element.sendKeys("ääöö");
+        element = driver.findElement(By.name("misc_note"));
+        element.sendKeys("ö ä å");
+        element = driver.findElement(By.name("misc_year"));
+        element.sendKeys("123");
+
+         driver.findElement(By.cssSelector("input[type=\"submit\"]")).click()
+    }
+
+    then 'new reference is added to the system', {
+        driver.getPageSource().contains("Åke Böyhä").shouldBe true
+        driver.getPageSource().contains("pulloposti").shouldBe true
+        driver.getPageSource().contains("Äiti lähetä \$5\$5\$5\$5\$5").shouldBe true
+        driver.getPageSource().contains("ääöö").shouldBe true
+        driver.getPageSource().contains("ö ä å").shouldBe true
+        driver.getPageSource().contains("123").shouldBe true
+    }
     }
 }
