@@ -29,6 +29,14 @@
                     <a class="navbar-brand" href="list">We &hearts; Justin <img class="bibtex" src="http://upload.wikimedia.org/wikipedia/commons/3/30/BibTeX_logo.svg" alt="BibTex">!</a>
                 </div>
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <form action="${pageContext.request.contextPath}/app/list" class="navbar-form navbar-left" role="search" method="get">
+                        <div class="form-group">
+                            <input id="search" name="search" type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </form>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a class="btn btn-primary ${param.preview}" href="view-bibtext">Preview</a></li>
                         <li><a class="btn btn-primary ${param.addClass}" href="add">Add new</a></li>

@@ -2,8 +2,11 @@
         </div>
         <script>
             $(function() {
-                $(document).on('click', function() {
-                    $('.navbar-collapse.in').collapse('hide');
+                searchInput = $('#search');
+                $(document).on('click', function(e) {
+                    if (e.target !== searchInput.get(0)) {
+                        $('.navbar-collapse.in').collapse('hide');
+                    }
                 });
             });
         </script>

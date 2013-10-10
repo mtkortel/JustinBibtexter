@@ -1,21 +1,22 @@
 .panel dl, .panel h4 {
     margin-top: 0;
     margin-bottom: 0;
-}                
+}
 .bibtex {
     height: 1em;
 }
 .navbar-default .navbar-brand {
     color: black;
 }
-body { 
-    padding-top: 70px; 
+body {
+    padding-top: 70px;
     padding-bottom: 20px;
 }
 .nav li a {
-    display: inline;
+    display: inline-block;
     vertical-align: middle;
     padding: 6px 12px;
+    border-radius: 4px;
 }
 .nav li a.btn-primary {
     color: #fff;
@@ -38,5 +39,10 @@ body {
 /* collapsed state */
 .navbar-collapse.in, .navbar-collapse.collapsing {
     text-align: right;
-    padding-right: 30px;
+}
+.navbar-collapse.in ul, .navbar-collapse.collapsing ul {
+    margin-right: 0;
+}
+.navbar-collapse.in li, .navbar-collapse.collapsing li {
+    height: 40px;
 }
