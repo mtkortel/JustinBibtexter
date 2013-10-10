@@ -1,5 +1,6 @@
 package ohtu.justinbiber.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,6 +25,7 @@ public class EntryType implements Serializable {
 
     private String typeKey;
     @OneToMany
+    @JsonIgnore
     private List<FieldType> requiredFields = new ArrayList<FieldType>();
 
     public EntryType() {

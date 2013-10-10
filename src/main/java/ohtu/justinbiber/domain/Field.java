@@ -46,4 +46,8 @@ public class Field implements Serializable {
         this.fieldValue = value;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
 }

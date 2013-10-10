@@ -4,15 +4,18 @@ import java.util.List;
 import java.util.Map;
 import ohtu.justinbiber.domain.Entry;
 import ohtu.justinbiber.domain.EntryType;
+import ohtu.justinbiber.jsonp.JsonpObject;
 import ohtu.justinbiber.service.BibConvertService;
 import ohtu.justinbiber.service.BibService;
 import ohtu.justinbiber.service.BibTypeService;
+import ohtu.justinbiber.jsonp.JsonpWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class BibController {
@@ -25,9 +28,10 @@ public class BibController {
     BibTypeService bibTypeService;
 
     @RequestMapping(value = "list", method = RequestMethod.GET)
-    public String list(Model model) {
+    public String list(Model model, @RequestParam(required = false) String query) {
         List<Entry> entries = bibService.getEntries();
         model.addAttribute("entries", entries);
+        model.addAttribute("query", query);
         return "list";
     }
 
@@ -67,4 +71,11 @@ public class BibController {
         model.addAttribute("preview", prev);
         return "preview";
     }
+
+    @RequestMapping(value = "entries.js", method = RequestMethod.GET, produces = {"application/x-javascript", "application/javascript", "text/javascript"})
+    @ResponseBody
+    public JsonpObject<List<Entry>> entries() {
+        return new JsonpWrapper<List<Entry>>("justin", bibService.getEntries());
+    }
+
 }
