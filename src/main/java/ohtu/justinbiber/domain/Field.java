@@ -30,24 +30,28 @@ public class Field implements Serializable {
         this.fieldValue = value;
     }
 
-    public String getKey() {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getFieldKey() {
         return fieldKey;
     }
 
-    public String getValue() {
+    public void setFieldKey(String fieldKey) {
+        this.fieldKey = fieldKey;
+    }
+
+    public String getFieldValue() {
         return fieldValue;
     }
 
-    public void setKey(String key) {
-        this.fieldKey = key.toLowerCase();
-    }
-
-    public void setValue(String value) {
-        this.fieldValue = value;
-    }
-
-    public Integer getId() {
-        return id;
+    public void setFieldValue(String fieldValue) {
+        this.fieldValue = fieldValue;
     }
 
 }

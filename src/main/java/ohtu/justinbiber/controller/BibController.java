@@ -9,6 +9,7 @@ import ohtu.justinbiber.service.BibConvertService;
 import ohtu.justinbiber.service.BibService;
 import ohtu.justinbiber.service.BibTypeService;
 import ohtu.justinbiber.jsonp.JsonpWrapper;
+import ohtu.justinbiber.service.EntryBibtex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,7 +54,7 @@ public class BibController {
         Entry entry = new Entry(bibTypeService.getEntryType(type));
         entry.setEntryKey(params.get("key"));
         for (String key: params.keySet()) {
-            if (!key.equals("bibtype") && !key.equals("key")) {
+            if (!key.equals("bibtype") && !key.equals("key") && !key.equals("tags")) {
                 String value = params.get(key);
                 if (!value.isEmpty()) {
                     String shortKey = key.substring(type.length() + 1);
@@ -61,14 +62,19 @@ public class BibController {
                 }
             }
         }
+        String tags = params.get("tags");
+        if (tags != null && !tags.isEmpty()) {
+            entry.addField("tags", tags);
+        }
         bibService.addEntry(entry);
         return "redirect:list";
     }
 
     @RequestMapping(value = "view-bibtext", method = RequestMethod.GET)
-    public String preview(Model model) {
-        String prev = bibConvert.getBibtext(bibService.getEntries());
+    public String preview(Model model, @RequestParam(required = false) String query) {
+        List<EntryBibtex> prev = bibConvert.getBibtexEntries(bibService.getEntries());
         model.addAttribute("preview", prev);
+        model.addAttribute("query", query);
         return "preview";
     }
 

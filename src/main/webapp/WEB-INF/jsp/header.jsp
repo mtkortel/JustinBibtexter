@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="s" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:if test="${not empty query}">
     <s:eval expression="T(java.net.URLEncoder).encode(query)" var="urlQuery" />
     <c:set var="urlQuery" value="?query=${urlQuery}" />
@@ -9,7 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>We &hearts; Justin BibTex!</title>
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -42,6 +43,17 @@
                     previewLink.attr('href', url);
                 }
                 searchInput.on('input', updatePreviewLink);
+                // update entrycount
+                var entryCount = $('#entrycount');
+                justin.filtered(function(entries) {
+                    entryCount.text(entries.length);
+                });
+                // query justin
+                searchInput.on('input', function() {
+                    justin.filter(searchInput.val());
+                });
+                // init dynamic stuff
+                justin.filter('${query}');
             });
         </script>
     </head>
@@ -60,11 +72,12 @@
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <form action="${pageContext.request.contextPath}/app/list" class="navbar-form navbar-left" role="search" method="get">
                         <div class="form-group">
-                            <input id="query" name="query" type="text" class="form-control" placeholder="Search" value="${query}">
+                            <input id="query" name="query" type="text" class="form-control" placeholder="Search" value="<c:out value="${query}"/>">
                         </div>
                         <button type="submit" class="btn btn-default">
                             <span class="glyphicon glyphicon-search"></span>
                         </button>
+                        <span class="text-muted entrycount"><span id="entrycount">${fn:length(entries)}</span> entries</span>
                     </form>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a id="preview" class="btn btn-primary ${param.preview}" href="${bibtex}${urlQuery}">Preview</a></li>

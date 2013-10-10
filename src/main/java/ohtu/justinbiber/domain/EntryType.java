@@ -25,7 +25,6 @@ public class EntryType implements Serializable {
 
     private String typeKey;
     @OneToMany
-    @JsonIgnore
     private List<FieldType> requiredFields = new ArrayList<FieldType>();
 
     public EntryType() {

@@ -44,4 +44,21 @@ public class SqlBibService implements BibService {
                 .getResultList();
     }
 
+    @Override
+    @Transactional
+    public void initialize(BibInitializer<BibServiceManager> initializer) {
+        // only initialize if there are no entries
+        if (((Number) entityManager.createQuery(
+                "SELECT COUNT(e) FROM Entry e")
+                .getSingleResult())
+                .intValue() == 0) {
+            initializer.initialize(new BibServiceManager() {
+                @Override
+                public Entry addEntry(Entry entry) {
+                    return entityManager.merge(entry);
+                }
+            });
+        }
+    }
+
 }

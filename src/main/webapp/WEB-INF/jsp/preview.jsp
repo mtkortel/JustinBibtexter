@@ -3,7 +3,15 @@
 <jsp:include page="header.jsp">
     <jsp:param name="preview" value="disabled"/>
 </jsp:include>
-<pre>
-${preview}
-</pre>
+<pre><c:forEach var="entrybib" items="${preview}"><div id="entry_${entrybib.entry.id}" class="entry">${entrybib.bibtex}</div></c:forEach></pre>
+<script>
+$(function() {
+    justin.filtered(function(entries) {
+        $('.entry').hide();
+        entries.forEach(function(e) {
+            $('#entry_'+e.id).show();
+        });
+    })
+});
+</script>
 <%@include file="footer.jsp"%>

@@ -46,3 +46,22 @@ body {
 .navbar-collapse.in li, .navbar-collapse.collapsing li {
     height: 40px;
 }
+/* entrycount */
+.entrycount {
+    margin-left: 10px;
+}
+.navbar-collapse.in .entrycount, .navbar-collapse.collapsing .entrycount {
+    display: inline-block;
+    float: left;
+    line-height: 34px
+}
+.input_fields {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    border-top: 1px solid #eeeeee;
+    padding-top: 20px;
+}
+h3 {
+    margin-top: 30px;
+}
+

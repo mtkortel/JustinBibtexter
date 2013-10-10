@@ -34,7 +34,7 @@ public class SqlBibTypeService implements BibTypeService {
 
     @Override
     @Transactional
-    public void initialize(BibTypeServiceInitializer initializer) {
+    public void initialize(BibInitializer<BibTypeServiceManager> initializer) {
         // only initialize if there are no entry types
         if (((Number) entityManager.createQuery(
                 "SELECT COUNT(e) FROM EntryType e")

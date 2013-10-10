@@ -19,5 +19,5 @@ public interface BibTypeService {
      */
     public EntryType getEntryType(String key);
 
-    public void initialize(BibTypeServiceInitializer initializer);
+    public void initialize(BibInitializer<BibTypeServiceManager> initializer);
 }

@@ -2,6 +2,7 @@ package ohtu.justinbiber.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,6 +36,12 @@ public class Entry implements Serializable {
         this.entryType = type;
     }
 
+    public Entry(EntryType entryType, String entryKey, Field[] fields) {
+        this.entryType = entryType;
+        this.entryKey = entryKey;
+        this.fields = Arrays.asList(fields);
+    }
+
     public void addField(String key, String value) {
         fields.add(new Field(key, value));
     }
@@ -59,8 +66,8 @@ public class Entry implements Serializable {
     public String getValue(String key) {
         String k = key.toLowerCase();
         for (Field field : fields) {
-            if (field.getKey().equals(k)) {
-                return field.getValue();
+            if (field.getFieldKey().equals(k)) {
+                return field.getFieldValue();
             }
         }
         return null;

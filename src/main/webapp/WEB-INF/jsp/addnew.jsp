@@ -6,7 +6,7 @@
     <jsp:param name="addClass" value="disabled"/>
 </jsp:include>
 
-<form role="form" action="add-bibtext" method="post" modelAttribute="bib">
+<form role="form" action="add-bibtext" method="post">
     <div class="form-group">
         <label for="bibtype">Entry type</label>
         <select class="form-control" id="bibtype" name="bibtype">
@@ -19,16 +19,26 @@
         <label for="key">key</label>
         <input type="text" class="form-control" id="key" name="key">
     </div>
-    <c:forEach var="type" items="${types}">
-        <div class="fields ${type.typeKey}">
-            <c:forEach var="field" items="${type.requiredFieldTypes}">
-                <div class="form-group">
-                    <label for="${type.typeKey}_${field.fieldKey}">${field.fieldKey}</label>
-                    <input type="${field.valueType.typeString}" class="form-control" id="${type.typeKey}_${field.fieldKey}" name="${type.typeKey}_${field.fieldKey}" disabled>
-                </div>
-            </c:forEach>
+    <h3>Required fields</h3>
+    <div class="input_fields">
+        <c:forEach var="type" items="${types}">
+            <div class="fields ${type.typeKey}">
+                <c:forEach var="field" items="${type.requiredFieldTypes}">
+                    <div class="form-group">
+                        <label for="${type.typeKey}_${field.fieldKey}">${field.fieldKey}</label>
+                        <input type="${field.valueType.typeString}" class="form-control" id="${type.typeKey}_${field.fieldKey}" name="${type.typeKey}_${field.fieldKey}" disabled>
+                    </div>
+                </c:forEach>
+            </div>
+        </c:forEach>
+    </div>
+    <h3>Custom fields</h3>
+    <div class="input_fields">
+        <div class="form-group">
+            <label for="tags">tags</label>
+            <input type="text" class="form-control" id="tags" name="tags">
         </div>
-    </c:forEach>
+    </div>
     <div class="text-right">
         <input type="submit" class="btn btn-primary" value="Submit">
         <a class="btn btn-default" href="list">Cancel</a>

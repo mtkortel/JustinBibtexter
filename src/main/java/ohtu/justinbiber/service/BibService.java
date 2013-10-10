@@ -25,4 +25,6 @@ public interface BibService {
      */
     public List<Entry> findEntriesByKey(String srchkey);
 
+    public void initialize(BibInitializer<BibServiceManager> initializer);
+
 }

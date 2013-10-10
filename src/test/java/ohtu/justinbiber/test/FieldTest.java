@@ -45,13 +45,13 @@ public class FieldTest {
     @Test
     public void consturctAfield() {
         Field field = new Field("dfgdg", "asdaf");
-        assertTrue(field.getKey().equals("dfgdg"));
-        assertTrue(field.getValue().equals("asdaf"));
+        assertTrue(field.getFieldKey().equals("dfgdg"));
+        assertTrue(field.getFieldValue().equals("asdaf"));
 
 
-        field.setValue("-111");
+        field.setFieldValue("-111");
 
-        assertTrue(field.getValue().equals("-111"));
+        assertTrue(field.getFieldValue().equals("-111"));
     }
 
     @Test
@@ -59,9 +59,9 @@ public class FieldTest {
 
         Field field = new Field("", "");
 
-        field.setKey("22225");
+        field.setFieldKey("22225");
 
-        assertTrue(field.getKey().equals("22225"));
+        assertTrue(field.getFieldKey().equals("22225"));
 
 
     }
