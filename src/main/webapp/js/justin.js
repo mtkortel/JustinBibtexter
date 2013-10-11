@@ -104,7 +104,6 @@ var justin = (function() {
         var ret = [];
         q = query;
         query = prepareQuery(query);
-        console.log(query);
         es.forEach(function(e) {
             if (match(query, e)) {
                 ret.push(e);
